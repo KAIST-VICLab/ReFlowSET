@@ -300,11 +300,22 @@ ReFlowSET/
 }
 ```
 
+Our earlier SAR-to-EO work, which ReFlowSET builds on and compares against:
+
+```bibtex
+@article{do2026cdiffset,
+  title   = {C-DiffSET: Leveraging Latent Diffusion for SAR-to-EO Image Translation with Confidence-Guided Reliable Object Generation},
+  author  = {Do, Jeonghyeok and Lee, Jaehyup and Lee, Seungchul and Kim, Munchurl},
+  journal = {IEEE Transactions on Circuits and Systems for Video Technology},
+  year    = {2026}
+}
+```
+
 ---
 
 ## Acknowledgements
 
-This work was supported in part by the National Research Foundation of Korea (NRF) grant funded by the Korean government (MSIT) under the Sejong Science Fellowship Program (RS-2026-25484549, \u201cGenerative AI-based High-Resolution SAR Image Visualization and Analysis Technology for All-Weather Earth Observation\u201d, 50%) and in part by the NRF grant funded by the MSIT (RS-2025-02222525, \u201cDevelopment of AI-based SAR-to-EO image conversion technology\u201d, 50%).
+This work was supported in part by the National Research Foundation of Korea (NRF) grant funded by the Korean government (MSIT) under the Sejong Science Fellowship Program (RS-2026-25484549, “Generative AI-based High-Resolution SAR Image Visualization and Analysis Technology for All-Weather Earth Observation”, 50%) and in part by the NRF grant funded by the MSIT (RS-2025-02222525, “Development of AI-based SAR-to-EO image conversion technology”, 50%).
 
 This work builds on the Apache-2.0 autoencoder of
 [FLUX.2-klein-base-4B](https://huggingface.co/black-forest-labs/FLUX.2-klein-base-4B)
