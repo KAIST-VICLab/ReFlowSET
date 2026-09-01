@@ -52,7 +52,7 @@ def parse_args() -> argparse.Namespace:
         description=__doc__.split("\n")[0],
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="Reproduce the paper's dumps:\n"
-               "  python scripts/translate.py --checkpoint KAIST-VICLab/ReFlowSET \\\n"
+               "  python scripts/translate.py --checkpoint JeonghyeokDo/ReFlowSET \\\n"
                "      --subfolder qxs-saropt --sar-dir DATA/sar_256_oc_0.2 \\\n"
                "      --out-dir results/eo --num-inference-steps 50 \\\n"
                "      --guidance-scale 1.5 --seed 2024",

@@ -6,8 +6,8 @@ Face Hub; the code that produced each one is in this repository.
 
 | | |
 |---|---|
-| Ours | [`KAIST-VICLab/ReFlowSET`](https://huggingface.co/KAIST-VICLab/ReFlowSET) |
-| Comparison methods | [`KAIST-VICLab/ReFlowSET-baselines`](https://huggingface.co/KAIST-VICLab/ReFlowSET-baselines) |
+| Ours | [`JeonghyeokDo/ReFlowSET`](https://huggingface.co/JeonghyeokDo/ReFlowSET) |
+| Comparison methods | [`JeonghyeokDo/ReFlowSET-baselines`](https://huggingface.co/JeonghyeokDo/ReFlowSET-baselines) |
 
 > **These numbers are not comparable with the ones printed in the source
 > papers.** Different splits, resolutions and evaluator conventions make

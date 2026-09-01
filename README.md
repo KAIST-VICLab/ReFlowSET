@@ -10,7 +10,7 @@ Jeonghyeok Do<sup>1</sup>, Seungchul Lee<sup>2</sup>, Munchurl Kim<sup>1*</sup>
 
 [![arXiv](https://img.shields.io/badge/arXiv-{{ARXIV_ID}}-red)](https://arxiv.org/abs/{{ARXIV_ID}})
 [![Project Page](https://img.shields.io/badge/Project%20Page-ReFlowSET-green)](https://kaist-viclab.github.io/ReFlowSET_site/)
-[![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-ReFlowSET-yellow)](https://huggingface.co/KAIST-VICLab/ReFlowSET)
+[![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-ReFlowSET-yellow)](https://huggingface.co/JeonghyeokDo/ReFlowSET)
 
 ---
 
@@ -116,7 +116,7 @@ from huggingface_hub import snapshot_download
 # One repository holds both arms, one per subfolder. `DiffusionPipeline` has no
 # `subfolder` argument, so fetch the arm and load it as a local pipeline.
 ARM = "qxs-saropt"                                   # or "sar2opt"
-root = snapshot_download("KAIST-VICLab/ReFlowSET", allow_patterns=[f"{ARM}/*"])
+root = snapshot_download("JeonghyeokDo/ReFlowSET", allow_patterns=[f"{ARM}/*"])
 pipe = DiffusionPipeline.from_pretrained(
     f"{root}/{ARM}", custom_pipeline=f"{root}/{ARM}", torch_dtype=torch.float32,
 ).to("cuda")
@@ -135,7 +135,7 @@ Or translate a folder:
 
 ```bash
 python scripts/translate.py \
-    --checkpoint KAIST-VICLab/ReFlowSET --subfolder qxs-saropt \
+    --checkpoint JeonghyeokDo/ReFlowSET --subfolder qxs-saropt \
     --sar-dir  /path/to/test/SAR \
     --out-dir  ./results/eo \
     --num-inference-steps 50 --guidance-scale 1.5 --seed 2024
