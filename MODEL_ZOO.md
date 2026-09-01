@@ -30,8 +30,8 @@ Face Hub; the code that produced each one is in this repository.
 | ResShift | NeurIPS'23 | 140.2 | 0.334 | 0.607 | 0.217 | 14.20 | 50,000 | `ema_model.pth` | 456 MB | S-Lab License 1.0 (non-commercial) |
 | StegoGAN‡ | CVPR'24 | 106.8 | 0.384 | 0.658 | 0.254 | 12.96 | 120,030 it | `net_G_A.pth`, `net_G_B.pth` | 98 MB | none upstream ⚠ |
 | Conditional Diffusion | GRSL'23 | 88.6 | 0.355 | 0.730 | 0.213 | 11.55 | 50,000 | `ema_final.pt` | 627 MB | none upstream ⚠ |
-| cBBDM | GRSL'25 | 50.6 | 0.246 | 0.539 | 0.372 | 16.02 | 50,000 | `last_model.pth` | 2,020 MB | MIT |
 | E3Diff | GRSL'24 | 47.8 | 0.278 | 0.530 | 0.302 | 16.44 | 250,000+60,000 | `gen.pth` | 733 MB | none upstream ⚠ |
+| cBBDM | GRSL'25 | 50.6 | 0.246 | 0.539 | 0.372 | 16.02 | 50,000 | `last_model.pth` | 2,020 MB | MIT |
 | C-DiffSET | TCSVT'26 | 19.9 | 0.233 | 0.526 | 0.380 | 16.92 | 40,000 of 50,000 † | `diffusion_pytorch_model.safetensors` | 3,303 MB | MIT |
 | ReFlowSET (Ours) | this work | 19.1 | 0.231 | 0.534 | 0.355 | 16.09 | 40,000 | *(see below)* | — | — |
 
@@ -51,8 +51,8 @@ Face Hub; the code that produced each one is in this repository.
 | ResShift | NeurIPS'23 | 141.7 | 0.304 | 0.597 | 0.177 | 14.31 | 50,000 | `ema_model.pth` | 456 MB | S-Lab License 1.0 (non-commercial) |
 | StegoGAN‡ | CVPR'24 | 150.1 | 0.347 | 0.655 | 0.158 | 12.47 | 87,000 it | `net_G_A.pth`, `net_G_B.pth` | 98 MB | none upstream ⚠ |
 | Conditional Diffusion | GRSL'23 | 211.8 | 0.415 | 0.686 | 0.248 | 12.48 | 50,000 | `ema_final.pt` | 632 MB | none upstream ⚠ |
-| cBBDM | GRSL'25 | 222.3 | 0.377 | 0.571 | 0.361 | 17.05 | 50,137 | `last_model.pth` | 2,020 MB | MIT |
 | E3Diff | GRSL'24 | 104.7 | 0.232 | 0.529 | 0.249 | 16.09 | 250,000+60,000 | `gen.pth` | 733 MB | none upstream ⚠ |
+| cBBDM | GRSL'25 | 222.3 | 0.377 | 0.571 | 0.361 | 17.05 | 50,137 | `last_model.pth` | 2,020 MB | MIT |
 | C-DiffSET | TCSVT'26 | 78.1 | 0.214 | 0.529 | 0.314 | 16.81 | 40,000 of 50,000 † | `diffusion_pytorch_model.safetensors` | 3,303 MB | MIT |
 | ReFlowSET (Ours) | this work | 66.3 | 0.185 | 0.522 | 0.287 | 16.06 | 20,000 | *(see below)* | — | — |
 
@@ -80,8 +80,8 @@ the released implementation does at its published protocol. Ratios:
 | ResShift | <https://github.com/zsyOAOA/ResShift> | `bb03b7d21614cace01787e097c8a6ab6b945227d` |
 | StegoGAN | <https://github.com/sian-wusidi/StegoGAN> | `cad61997c0f82793444f60f81298142b80cdf3c1` |
 | Conditional Diffusion | <https://github.com/Coordi777/Conditional-Diffusion-for-SAR-to-Optical-Image-Translation> | `not recorded (vendored tree carries no .git)` |
-| cBBDM | <https://github.com/egshkim/ConditionalBBDM-for-VHR-SAR-to-Optical> | `8ce15934f4d4e3f01efe70d11e2d9b9e0859210c` |
 | E3Diff | <https://github.com/DeepSARRS/E3Diff> | `38601093ab8f8e4b478144621f20890b100a3b74` |
+| cBBDM | <https://github.com/egshkim/ConditionalBBDM-for-VHR-SAR-to-Optical> | `8ce15934f4d4e3f01efe70d11e2d9b9e0859210c` |
 | C-DiffSET | <https://github.com/KAIST-VICLab/C-DiffSET> | `fixed-step checkpoint-40000` |
 | ReFlowSET (Ours) | <https://github.com/KAIST-VICLab/ReFlowSET> | `this repository` |
 
