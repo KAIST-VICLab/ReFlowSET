@@ -1,0 +1,154 @@
+# ResShift for SAR-to-EO translation on SAR2Opt.
+# Clone of configs/qxs_sar2eo_256.yaml (itself based on deblur_gopro256.yaml,
+# the official paired same-size sf=1 route).
+#
+# Changes vs qxs_sar2eo_256.yaml:
+#   - train data -> sar2opt trainA/trainB (600px jpg; im_exts jpg); PairedData
+#     concatenates LQ+GT before the transform, so the random 256 crop stays
+#     pair-aligned.
+#   - val data -> the 512 center-crop PNG staging (the SAR2Opt eval protocol
+#     crop); 512 is an exact multiple of val_resolution 256, so the val path
+#     crops to 512 and runs whole images (latent 128 divisible by window 8).
+#   - iterations kept at 50000 (matched to the other diffusion baselines); note
+#     SAR2Opt has only 1450 train tiles (random 256-of-600 crops mitigate).
+
+trainer:
+  target: trainer.TrainerDifIRLPIPS
+
+model:
+  target: models.unet.UNetModelSwin
+  ckpt_path: ~
+  params:
+    image_size: 64
+    in_channels: 3
+    model_channels: 160
+    out_channels: 3
+    attention_resolutions: [64,32,16,8]
+    dropout: 0
+    channel_mult: [1, 2, 2, 4]
+    num_res_blocks: [2, 2, 2, 2]
+    conv_resample: True
+    dims: 2
+    use_fp16: False
+    num_head_channels: 32
+    use_scale_shift_norm: True
+    resblock_updown: False
+    swin_depth: 2
+    swin_embed_dim: 192
+    window_size: 8
+    mlp_ratio: 4
+    cond_lq: True
+    lq_size: 256
+
+diffusion:
+  target: models.script_util.create_gaussian_diffusion
+  params:
+    sf: 1                        # same-size mapping: SAR 256 -> EO 256 (x1 "SR")
+    schedule_name: exponential
+    schedule_kwargs:
+      power: 0.3
+    etas_end: 0.99
+    steps: 4
+    min_noise_level: 0.2
+    kappa: 2.0
+    weighted_mse: False
+    predict_type: xstart
+    timestep_respacing: ~
+    scale_factor: 1.0
+    normalize_input: True
+    latent_flag: True
+
+autoencoder:
+  target: ldm.models.autoencoder.VQModelTorch
+  ckpt_path: ${CKPT_ROOT}/autoencoder_vq_f4.pth
+  tune_decoder: False
+  params:
+    lora_tune_decoder: False   # trainer.py:484 reads this key unconditionally
+    embed_dim: 3
+    n_embed: 8192
+    ddconfig:
+      double_z: False
+      z_channels: 3
+      resolution: 256
+      in_channels: 3
+      out_ch: 3
+      ch: 128
+      ch_mult:
+      - 1
+      - 2
+      - 4
+      num_res_blocks: 2
+      attn_resolutions: []
+      dropout: 0.0
+      padding_mode: zeros
+
+lpips:
+  net: alex
+
+data:
+  train:
+    type: paired
+    params:
+      dir_path: ${DATA_ROOT}/sar2opt/trainA        # SAR (LQ)
+      dir_path_extra: ${DATA_ROOT}/sar2opt/trainB  # EO  (GT)
+      transform_type: rcrop_aug_norm
+      transform_kwargs:
+        pass_aug: False
+        pch_size: 256
+        mean: 0.5
+        std: 0.5
+        max_value: 255
+      im_exts: jpg
+      length: ~
+      recursive: False
+  val:
+    type: paired
+    params:
+      dir_path: ${DATA_ROOT}/s2o_512/testA
+      dir_path_extra: ${DATA_ROOT}/s2o_512/testB
+      transform_type: default
+      transform_kwargs:
+        pass_aug: True
+        pch_size: 256
+        mean: ${data.train.params.transform_kwargs.mean}
+        std: ${data.train.params.transform_kwargs.std}
+        max_value: ${data.train.params.transform_kwargs.max_value}
+      im_exts: png
+      length: 32
+      recursive: False
+
+train:
+  # learning rate
+  lr: 5e-5
+  lr_min: 2e-5
+  lr_schedule: cosin
+  warmup_iterations: 2000
+  # dataloader
+  batch: [16, 4]
+  microbatch: 8               # 2 grad-accum steps (see qxs config VRAM notes)
+  num_workers: 4
+  prefetch_factor: 2
+  # optimization settings
+  weight_decay: 0
+  ema_rate: 0.999
+  iterations: 50000             # ~50k, matched to the other diffusion baselines
+  # save logging
+  save_freq: 5000
+  log_freq: [200, 2000, 4]      # [training loss, training images, val images]
+  loss_coef: [1.0, 4.0, 0.0]    # [latent-mse, pixel-lpips, pixel-mse]
+  local_logging: True
+  tf_logging: False
+  # validation settings
+  use_ema_val: True
+  val_freq: ${train.save_freq}
+  val_y_channel: True
+  val_resolution: ${model.params.lq_size}
+  val_padding_mode: reflect
+  # training setting
+  use_amp: True
+  seed: 123456
+  global_seeding: False
+  # model compile
+  compile:
+    flag: False
+    mode: reduce-overhead

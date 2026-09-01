@@ -1,0 +1,110 @@
+ReFlowSET — SAR-to-EO image translation with a rectified flow bridge
+Copyright 2026 Jeonghyeok Do, Seungchul Lee, and Munchurl Kim
+
+This product includes software developed by the authors above, licensed under
+the Apache License, Version 2.0 (see LICENSE).
+
+The trained model weights are NOT covered by LICENSE. See LICENSE-WEIGHTS.md.
+
+
+================================================================================
+1. Third-party model code (Apache-2.0)
+================================================================================
+
+FLUX.2 (Black Forest Labs)
+    Licensed under the Apache License, Version 2.0
+    https://huggingface.co/black-forest-labs/FLUX.2-klein-base-4B
+
+    a) Transformer primitives. src/reflowset/transformer_reflowset.py adapts
+       SingleStreamBlock, DoubleStreamBlock, Modulation, QKNorm, RMSNorm,
+       EmbedND / rope / apply_rope, MLPEmbedder and timestep_embedding from
+       Black Forest Labs' FLUX.2 model code. MODIFIED: the text stream is
+       replaced by a SAR stream, the conditioning path and the output head
+       differ, and the training-only REPA projector is absent from this
+       inference port.
+
+    b) Autoencoder. src/reflowset/autoencoder_flux2.py is a port of the same
+       upstream's autoencoder, used FROZEN and never fine-tuned. MODIFIED:
+       re-expressed as a diffusers ModelMixin; the encoder returns the posterior
+       mean and discards the log-variance; a 2x2 space-to-depth pack and the
+       shipped BatchNorm latent normaliser are applied at the module boundary.
+
+    The autoencoder WEIGHTS are redistributed with the checkpoints. They are the
+    Apache-2.0 file from FLUX.2-klein-base-4B, re-serialised from diffusers key
+    names to the upstream layout and cast to bfloat16. Tensors were paired BY
+    VALUE, not by an assumed rename table; the round trip is bit-identical to
+    the source through a full encode/decode. scripts/convert_flux2_ae.py plus
+    assets/flux2_ae_key_map.json reproduce the file from the official download.
+
+    SUBSTITUTED AFTER TRAINING, and stated plainly because it matters: both
+    released arms were TRAINED and EVALUATED with the FLUX.2-dev serialisation
+    of this autoencoder. That file encoded and decoded every image during
+    training and during the evaluation that produced the paper's table. It is
+    published under the FLUX Non-Commercial License, whose Section 4(a)(iii)
+    forbids "surveillance purposes, including all research and development
+    related to surveillance" and whose Section 1(a) makes the restriction
+    inherit permanently.
+
+    The file published here is the Apache-2.0 serialisation of the SAME network,
+    from FLUX.2-klein-base-4B. 250 of 251 tensors pair one-to-one by value with
+    a worst absolute deviation of 7.80e-03 (bfloat16 rounding; 3.89e-03
+    relative), and the unpaired entry is a BatchNorm step counter rather than a
+    weight. Swapping it into the released checkpoints, measured end to end,
+    changes QXS-SAROPT PSNR by less than 0.004 dB in absolute value; four
+    independent measurements at different guidance scales and sample sets land
+    between -0.004 and +0.002 dB, so the sign is not resolved and only the
+    magnitude is meaningful. For scale, changing only the evaluation seed moves
+    the same measurement by +0.395 dB. Nothing the paper prints changes.
+
+    Apache-2.0 Section 6 withholds trademark rights. This model is named
+    ReFlowSET and must not be presented as a FLUX product or endorsed by
+    Black Forest Labs.
+
+Hugging Face Diffusers
+    Licensed under the Apache License, Version 2.0
+    https://github.com/huggingface/diffusers
+    Pipeline, scheduler and model base classes and their conventions.
+
+
+================================================================================
+2. Third-party components used in TRAINING and NOT redistributed
+================================================================================
+
+DINOv3 (Meta Platforms) — frozen REPA teacher, ViT-L/16 LVD-1689M
+
+    Used during training only, with lambda_repa = 0.5, to align block-8
+    activations with the teacher's patch tokens. The teacher is not loaded at
+    inference and the projector that consumed it is not part of the released
+    checkpoints.
+
+    NO DINOv3 WEIGHTS ARE REDISTRIBUTED HERE. Obtain them from Meta's official
+    release and accept the DINOv3 License:
+        https://github.com/facebookresearch/dinov3
+
+    DINOv3 License Section 1(b)(ii) requires that publications reporting research
+    performed using DINO Materials acknowledge that use; this NOTICE and the
+    paper's acknowledgements do so. Section 1(b)(v) restricts use under Trade
+    Controls, including military, warfare and espionage end uses; anyone
+    retraining ReFlowSET with this teacher is subject to those terms directly.
+
+
+================================================================================
+3. Datasets — used, not redistributed
+================================================================================
+
+QXS-SAROPT      https://github.com/yaoxu008/QXS-SAROPT
+SAR2Opt         https://github.com/MarsZhaoYT/SAR2Opt-Heterogeneous-Dataset
+
+Neither dataset is redistributed by this repository. The frozen split lists in
+splits/ name files within those datasets and contain no imagery.
+
+
+================================================================================
+4. Comparison methods
+================================================================================
+
+The fifteen prior methods reproduced for the paper's main table were each trained
+with their own upstream implementation, and every resulting checkpoint inherits
+that implementation's terms. Four of them ship no upstream LICENSE file at all.
+Per-method attribution, licence text and the exact wording each one requires are
+in MODEL_ZOO.md and in the model cards accompanying the released weights.

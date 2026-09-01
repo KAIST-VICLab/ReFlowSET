@@ -1,0 +1,57 @@
+# Stage 2: official C-DiffSET (eps + confidence) on SAR2Opt (1450/627 split).
+# Clone of configs/qxs_eps_conf_run.yaml adapted to SAR2Opt via the repo's
+# native SAROptFeeder (paper protocol: random 512 crop train, center 512 test;
+# batch 16 as in the upstream saropt_eps_conf.yaml).
+# accelerator_path -> the stage-1 s2o_sd21ft output (overridden on the CLI by
+# the launch script as well).
+seed: 2024
+num_worker: 4
+work_dir: ${WORK_DIR}/s2o_cdiffset/
+
+phase: train
+
+# feeder
+feeder: feeders.feeder.SAROptFeeder
+train_feeder_args:
+  dataroot: ${DATA_ROOT}/sar2opt/
+  listroot: ${SPLITS_ROOT}/sar2opt/train_eo_list.txt
+  load_size: 600
+  crop_size: 512
+  hflip: True
+  vflip: True
+  rot: True
+
+test_feeder_args:
+  dataroot: ${DATA_ROOT}/sar2opt/
+  listroot: ${SPLITS_ROOT}/sar2opt/test_eo_list.txt
+  load_size: 600
+  crop_size: 512
+
+# optim
+optimizer: AdamW
+learning_rate: 3e-5
+weight_decay: 0.01
+lr_scheduler: cosine
+num_iter: 50000
+num_warmup: 100
+
+# loss
+prediction_type: epsilon
+
+# logging
+log_iter: 100
+save_iter: 2000
+save_epoch: 50
+eval_epoch: 50
+
+# training
+gpu: 0
+batch_size: 16
+test_batch_size: 1
+mixed_precision: "no"
+pretrained_model_name_or_path: Manojb/stable-diffusion-2-1-base
+accelerator_path: ${WORK_DIR}/s2o_sd21ft/lastest/model.safetensors
+
+# test
+num_inference_steps: 50
+val_len: 100

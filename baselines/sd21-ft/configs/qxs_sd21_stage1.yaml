@@ -1,0 +1,55 @@
+# Stage 1: 'only-finetuned SD2.1' baseline on QXS-SAROPT (the frozen official split).
+# Same hyper-parameters as configs/qxs_eps_conf.yaml; differences:
+#   * accelerator_path -> SD2.1 U-Net with duplicated 8-ch conv_in (4-ch out)
+#   * save_iter 10000, work_dir / gpu / paths of this kit, explicit fp32
+seed: 2024
+num_worker: 4
+work_dir: ${WORK_DIR}/qxs_sd21ft/
+
+phase: train
+
+# feeder
+feeder: feeders.feeder.QXSFeeder
+train_feeder_args:
+  dataroot: ${DATA_ROOT}/QXSLAB_SAROPT/
+  listroot: ${SPLITS_ROOT}/qxs-saropt/train_eo_list.txt
+  load_size: 256
+  crop_size: 256
+  hflip: True
+  vflip: True
+  rot: True
+
+test_feeder_args:
+  dataroot: ${DATA_ROOT}/QXSLAB_SAROPT/
+  listroot: ${SPLITS_ROOT}/qxs-saropt/test_eo_list.txt
+  load_size: 256
+  crop_size: 256
+
+# optim
+optimizer: AdamW
+learning_rate: 3e-5
+weight_decay: 0.01
+lr_scheduler: cosine
+num_iter: 50000
+num_warmup: 100
+
+# loss
+prediction_type: epsilon
+
+# logging
+log_iter: 100
+save_iter: 10000
+save_epoch: 50
+eval_epoch: 10
+
+# training
+gpu: 0
+batch_size: 64
+test_batch_size: 1
+mixed_precision: "no"
+pretrained_model_name_or_path: Manojb/stable-diffusion-2-1-base
+accelerator_path: ${CKPT_ROOT}/sd21_unet8ch_init.safetensors
+
+# test
+num_inference_steps: 50
+val_len: 100

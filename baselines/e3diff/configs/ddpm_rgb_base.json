@@ -1,0 +1,113 @@
+{
+    "name": "ddpm_rgb",
+    "phase": "train",
+    "gpu_ids": [
+        0
+    ],
+    "stage": 1,
+    "ddim_steps": null,
+    "loss_w": {
+        "fft_w": 0,
+        "lpips_w": 0,
+        "lambda_gan": 0,
+        "lcondition_w": 0
+    },
+    "path": {
+        "log": "logs",
+        "tb_logger": "tb_logger",
+        "results": "results",
+        "checkpoint": "checkpoint",
+        "resume_state": null
+    },
+    "datasets": {
+        "train": {
+            "name": "SAR_EO",
+            "mode": "translate",
+            "dataroot": "SET_BY_LAUNCHER",
+            "datatype": "img",
+            "l_resolution": 256,
+            "r_resolution": 256,
+            "batch_size": 16,
+            "num_workers": 4,
+            "use_shuffle": true,
+            "data_len": -1
+        },
+        "val": {
+            "name": "SAR_EO",
+            "mode": "translate",
+            "dataroot": "SET_BY_LAUNCHER",
+            "datatype": "img",
+            "l_resolution": 256,
+            "r_resolution": 256,
+            "data_len": 32
+        }
+    },
+    "model": {
+        "which_model_G": "sr3",
+        "finetune_norm": false,
+        "unet": {
+            "in_channel": 3,
+            "condition_channel": 3,
+            "out_channel": 3,
+            "condition_ch": 3,
+            "inner_channel": 64,
+            "norm_groups": 16,
+            "channel_multiplier": [
+                1,
+                2,
+                4,
+                8,
+                16
+            ],
+            "attn_res": [],
+            "res_blocks": 1,
+            "dropout": 0
+        },
+        "beta_schedule": {
+            "train": {
+                "schedule": "linear",
+                "n_timestep": 1000,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2,
+                "ddim": 0,
+                "lq_noiselevel": 0
+            },
+            "val": {
+                "schedule": "linear",
+                "n_timestep": 50,
+                "linear_start": 1e-6,
+                "linear_end": 1e-2,
+                "ddim": 1,
+                "lq_noiselevel": 0
+            }
+        },
+        "diffusion": {
+            "image_size": 256,
+            "channels": 3,
+            "conditional": true
+        }
+    },
+    "train": {
+        "n_iter": 250000,
+        "val_freq": 25000,
+        "save_checkpoint_freq": 25000,
+        "print_freq": 50,
+        "optimizer": {
+            "type": "adam",
+            "lr": 5e-5
+        },
+        "ema_scheduler": {
+            "step_start_ema": 5000,
+            "update_ema_every": 1,
+            "ema_decay": 0.9999
+        },
+        "scheduler": {
+            "type": "MultiStepLR",
+            "milestones": [],
+            "gamma": 0.5
+        }
+    },
+    "wandb": {
+        "project": "SAR2EO_S1_DDPM"
+    }
+}

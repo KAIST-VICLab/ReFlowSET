@@ -1,0 +1,103 @@
+# HI-Diff test on SAR2Opt SAR->EO: full testA (627 SAR imgs, 512 center-crop
+# PNGs = the SAR2Opt eval protocol crop) -> EO predictions, GT = testB crops.
+# Per-image PNGs land in results/test_HI_Diff_S2O/visualization/S2O/.
+name: test_HI_Diff_S2O
+model_type: HI_Diff_S2
+scale: 1
+num_gpu: 1
+manual_seed: 100
+
+datasets:
+  test_1:
+    name: S2O
+    type: PairedImageIRDataset
+    dataroot_gt: ${DATA_ROOT}/s2o_512/testB
+    dataroot_lq: ${DATA_ROOT}/s2o_512/testA
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+# network structures
+network_g:
+  type: Transformer
+  inp_channels: 3
+  out_channels: 3
+  dim: 48
+  num_blocks: [3,5,6,6]
+  num_refinement_blocks: 4
+  heads: [1,2,4,8]
+  ffn_expansion_factor: 2.66
+  bias: False
+  LayerNorm_type: WithBias
+  dual_pixel_task: False
+  embed_dim: 64
+  group: 4 # N=4*4
+
+network_le:
+  type: latent_encoder_gelu
+  in_chans: 6
+  embed_dim: 64 # same as above
+  block_num: 6
+  group: 4 # same as above
+  stage: 1
+  patch_expansion: 0.5
+  channel_expansion: 4
+
+network_le_dm:
+  type: latent_encoder_gelu
+  in_chans: 3
+  embed_dim: 64 # same as above
+  block_num: 6
+  group: 4 # same as above
+  stage: 2
+  patch_expansion: 0.5
+  channel_expansion: 4
+
+network_d:
+  type: denoising
+  in_channel: 256 # (embed_dim*4)
+  out_channel: 256 # (embed_dim*4)
+  inner_channel: 512
+  block_num: 4
+  group: 4 # same as above
+  patch_expansion: 0.5
+  channel_expansion: 2
+
+diffusion_schedule:
+  apply_ldm: False
+  schedule: linear
+  timesteps: 8
+  linear_start: 0.1 # 1e-6
+  linear_end: 0.99 # 1e-2
+
+# path
+path:
+  pretrain_network_g: ${WORK_DIR}/hidiff/experiments/train_HI_Diff_S2O_S2/models/net_g_latest.pth
+  param_key_g: params
+  strict_load_g: true
+
+  pretrain_network_le_dm: ${WORK_DIR}/hidiff/experiments/train_HI_Diff_S2O_S2/models/net_le_dm_latest.pth
+  param_key_g: params
+  strict_load_le_dm: true
+
+  pretrain_network_d: ${WORK_DIR}/hidiff/experiments/train_HI_Diff_S2O_S2/models/net_d_latest.pth
+  param_key_g: params
+  strict_load_d: true
+
+  resume_state: ~
+
+# validation settings
+val:
+  save_img: True
+  suffix: ''
+  selfensemble_testing: False
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+      test_y_channel: false

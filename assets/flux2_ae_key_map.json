@@ -1,0 +1,2474 @@
+{
+ "note": "diffusers(FLUX.2-klein-base-4B vae) -> BFL(Flux2AE) key map, recovered BY VALUE against FLUX.2-dev ae.safetensors on 2026-08-28. Minimum second-best/best separation ratio 104.6x, so no pairing is ambiguous. bn.num_batches_tracked is NOT mapped: klein4b ships 0, FLUX.2-dev ships 400000, the buffer is never read (bn is affine=False and forced to eval()), so a public build must write 0 and never copy the dev value.",
+ "n_mapped": 250,
+ "map": {
+  "bn.running_mean": "bn.running_mean",
+  "bn.running_var": "bn.running_var",
+  "decoder.conv_in.bias": "decoder.conv_in.bias",
+  "decoder.conv_in.weight": "decoder.conv_in.weight",
+  "decoder.conv_out.bias": "decoder.conv_out.bias",
+  "decoder.conv_out.weight": "decoder.conv_out.weight",
+  "decoder.mid.attn_1.k.bias": "decoder.mid_block.attentions.0.to_k.bias",
+  "decoder.mid.attn_1.k.weight": "decoder.mid_block.attentions.0.to_k.weight",
+  "decoder.mid.attn_1.norm.bias": "decoder.mid_block.attentions.0.group_norm.bias",
+  "decoder.mid.attn_1.norm.weight": "decoder.mid_block.attentions.0.group_norm.weight",
+  "decoder.mid.attn_1.proj_out.bias": "decoder.mid_block.attentions.0.to_out.0.bias",
+  "decoder.mid.attn_1.proj_out.weight": "decoder.mid_block.attentions.0.to_out.0.weight",
+  "decoder.mid.attn_1.q.bias": "decoder.mid_block.attentions.0.to_q.bias",
+  "decoder.mid.attn_1.q.weight": "decoder.mid_block.attentions.0.to_q.weight",
+  "decoder.mid.attn_1.v.bias": "decoder.mid_block.attentions.0.to_v.bias",
+  "decoder.mid.attn_1.v.weight": "decoder.mid_block.attentions.0.to_v.weight",
+  "decoder.mid.block_1.conv1.bias": "decoder.mid_block.resnets.0.conv1.bias",
+  "decoder.mid.block_1.conv1.weight": "decoder.mid_block.resnets.0.conv1.weight",
+  "decoder.mid.block_1.conv2.bias": "decoder.mid_block.resnets.0.conv2.bias",
+  "decoder.mid.block_1.conv2.weight": "decoder.mid_block.resnets.0.conv2.weight",
+  "decoder.mid.block_1.norm1.bias": "decoder.mid_block.resnets.0.norm1.bias",
+  "decoder.mid.block_1.norm1.weight": "decoder.mid_block.resnets.0.norm1.weight",
+  "decoder.mid.block_1.norm2.bias": "decoder.mid_block.resnets.0.norm2.bias",
+  "decoder.mid.block_1.norm2.weight": "decoder.mid_block.resnets.0.norm2.weight",
+  "decoder.mid.block_2.conv1.bias": "decoder.mid_block.resnets.1.conv1.bias",
+  "decoder.mid.block_2.conv1.weight": "decoder.mid_block.resnets.1.conv1.weight",
+  "decoder.mid.block_2.conv2.bias": "decoder.mid_block.resnets.1.conv2.bias",
+  "decoder.mid.block_2.conv2.weight": "decoder.mid_block.resnets.1.conv2.weight",
+  "decoder.mid.block_2.norm1.bias": "decoder.mid_block.resnets.1.norm1.bias",
+  "decoder.mid.block_2.norm1.weight": "decoder.mid_block.resnets.1.norm1.weight",
+  "decoder.mid.block_2.norm2.bias": "decoder.mid_block.resnets.1.norm2.bias",
+  "decoder.mid.block_2.norm2.weight": "decoder.mid_block.resnets.1.norm2.weight",
+  "decoder.norm_out.bias": "decoder.conv_norm_out.bias",
+  "decoder.norm_out.weight": "decoder.conv_norm_out.weight",
+  "decoder.post_quant_conv.bias": "post_quant_conv.bias",
+  "decoder.post_quant_conv.weight": "post_quant_conv.weight",
+  "decoder.up.0.block.0.conv1.bias": "decoder.up_blocks.3.resnets.0.conv1.bias",
+  "decoder.up.0.block.0.conv1.weight": "decoder.up_blocks.3.resnets.0.conv1.weight",
+  "decoder.up.0.block.0.conv2.bias": "decoder.up_blocks.3.resnets.0.conv2.bias",
+  "decoder.up.0.block.0.conv2.weight": "decoder.up_blocks.3.resnets.0.conv2.weight",
+  "decoder.up.0.block.0.nin_shortcut.bias": "decoder.up_blocks.3.resnets.0.conv_shortcut.bias",
+  "decoder.up.0.block.0.nin_shortcut.weight": "decoder.up_blocks.3.resnets.0.conv_shortcut.weight",
+  "decoder.up.0.block.0.norm1.bias": "decoder.up_blocks.3.resnets.0.norm1.bias",
+  "decoder.up.0.block.0.norm1.weight": "decoder.up_blocks.3.resnets.0.norm1.weight",
+  "decoder.up.0.block.0.norm2.bias": "decoder.up_blocks.3.resnets.0.norm2.bias",
+  "decoder.up.0.block.0.norm2.weight": "decoder.up_blocks.3.resnets.0.norm2.weight",
+  "decoder.up.0.block.1.conv1.bias": "decoder.up_blocks.3.resnets.1.conv1.bias",
+  "decoder.up.0.block.1.conv1.weight": "decoder.up_blocks.3.resnets.1.conv1.weight",
+  "decoder.up.0.block.1.conv2.bias": "decoder.up_blocks.3.resnets.1.conv2.bias",
+  "decoder.up.0.block.1.conv2.weight": "decoder.up_blocks.3.resnets.1.conv2.weight",
+  "decoder.up.0.block.1.norm1.bias": "decoder.up_blocks.3.resnets.1.norm1.bias",
+  "decoder.up.0.block.1.norm1.weight": "decoder.up_blocks.3.resnets.1.norm1.weight",
+  "decoder.up.0.block.1.norm2.bias": "decoder.up_blocks.3.resnets.1.norm2.bias",
+  "decoder.up.0.block.1.norm2.weight": "decoder.up_blocks.3.resnets.1.norm2.weight",
+  "decoder.up.0.block.2.conv1.bias": "decoder.up_blocks.3.resnets.2.conv1.bias",
+  "decoder.up.0.block.2.conv1.weight": "decoder.up_blocks.3.resnets.2.conv1.weight",
+  "decoder.up.0.block.2.conv2.bias": "decoder.up_blocks.3.resnets.2.conv2.bias",
+  "decoder.up.0.block.2.conv2.weight": "decoder.up_blocks.3.resnets.2.conv2.weight",
+  "decoder.up.0.block.2.norm1.bias": "decoder.up_blocks.3.resnets.2.norm1.bias",
+  "decoder.up.0.block.2.norm1.weight": "decoder.up_blocks.3.resnets.2.norm1.weight",
+  "decoder.up.0.block.2.norm2.bias": "decoder.up_blocks.3.resnets.2.norm2.bias",
+  "decoder.up.0.block.2.norm2.weight": "decoder.up_blocks.3.resnets.2.norm2.weight",
+  "decoder.up.1.block.0.conv1.bias": "decoder.up_blocks.2.resnets.0.conv1.bias",
+  "decoder.up.1.block.0.conv1.weight": "decoder.up_blocks.2.resnets.0.conv1.weight",
+  "decoder.up.1.block.0.conv2.bias": "decoder.up_blocks.2.resnets.0.conv2.bias",
+  "decoder.up.1.block.0.conv2.weight": "decoder.up_blocks.2.resnets.0.conv2.weight",
+  "decoder.up.1.block.0.nin_shortcut.bias": "decoder.up_blocks.2.resnets.0.conv_shortcut.bias",
+  "decoder.up.1.block.0.nin_shortcut.weight": "decoder.up_blocks.2.resnets.0.conv_shortcut.weight",
+  "decoder.up.1.block.0.norm1.bias": "decoder.up_blocks.2.resnets.0.norm1.bias",
+  "decoder.up.1.block.0.norm1.weight": "decoder.up_blocks.2.resnets.0.norm1.weight",
+  "decoder.up.1.block.0.norm2.bias": "decoder.up_blocks.2.resnets.0.norm2.bias",
+  "decoder.up.1.block.0.norm2.weight": "decoder.up_blocks.2.resnets.0.norm2.weight",
+  "decoder.up.1.block.1.conv1.bias": "decoder.up_blocks.2.resnets.1.conv1.bias",
+  "decoder.up.1.block.1.conv1.weight": "decoder.up_blocks.2.resnets.1.conv1.weight",
+  "decoder.up.1.block.1.conv2.bias": "decoder.up_blocks.2.resnets.1.conv2.bias",
+  "decoder.up.1.block.1.conv2.weight": "decoder.up_blocks.2.resnets.1.conv2.weight",
+  "decoder.up.1.block.1.norm1.bias": "decoder.up_blocks.2.resnets.1.norm1.bias",
+  "decoder.up.1.block.1.norm1.weight": "decoder.up_blocks.2.resnets.1.norm1.weight",
+  "decoder.up.1.block.1.norm2.bias": "decoder.up_blocks.2.resnets.1.norm2.bias",
+  "decoder.up.1.block.1.norm2.weight": "decoder.up_blocks.2.resnets.1.norm2.weight",
+  "decoder.up.1.block.2.conv1.bias": "decoder.up_blocks.2.resnets.2.conv1.bias",
+  "decoder.up.1.block.2.conv1.weight": "decoder.up_blocks.2.resnets.2.conv1.weight",
+  "decoder.up.1.block.2.conv2.bias": "decoder.up_blocks.2.resnets.2.conv2.bias",
+  "decoder.up.1.block.2.conv2.weight": "decoder.up_blocks.2.resnets.2.conv2.weight",
+  "decoder.up.1.block.2.norm1.bias": "decoder.up_blocks.2.resnets.2.norm1.bias",
+  "decoder.up.1.block.2.norm1.weight": "decoder.up_blocks.2.resnets.2.norm1.weight",
+  "decoder.up.1.block.2.norm2.bias": "decoder.up_blocks.2.resnets.2.norm2.bias",
+  "decoder.up.1.block.2.norm2.weight": "decoder.up_blocks.2.resnets.2.norm2.weight",
+  "decoder.up.1.upsample.conv.bias": "decoder.up_blocks.2.upsamplers.0.conv.bias",
+  "decoder.up.1.upsample.conv.weight": "decoder.up_blocks.2.upsamplers.0.conv.weight",
+  "decoder.up.2.block.0.conv1.bias": "decoder.up_blocks.1.resnets.0.conv1.bias",
+  "decoder.up.2.block.0.conv1.weight": "decoder.up_blocks.1.resnets.0.conv1.weight",
+  "decoder.up.2.block.0.conv2.bias": "decoder.up_blocks.1.resnets.0.conv2.bias",
+  "decoder.up.2.block.0.conv2.weight": "decoder.up_blocks.1.resnets.0.conv2.weight",
+  "decoder.up.2.block.0.norm1.bias": "decoder.up_blocks.1.resnets.0.norm1.bias",
+  "decoder.up.2.block.0.norm1.weight": "decoder.up_blocks.1.resnets.0.norm1.weight",
+  "decoder.up.2.block.0.norm2.bias": "decoder.up_blocks.1.resnets.0.norm2.bias",
+  "decoder.up.2.block.0.norm2.weight": "decoder.up_blocks.1.resnets.0.norm2.weight",
+  "decoder.up.2.block.1.conv1.bias": "decoder.up_blocks.1.resnets.1.conv1.bias",
+  "decoder.up.2.block.1.conv1.weight": "decoder.up_blocks.1.resnets.1.conv1.weight",
+  "decoder.up.2.block.1.conv2.bias": "decoder.up_blocks.1.resnets.1.conv2.bias",
+  "decoder.up.2.block.1.conv2.weight": "decoder.up_blocks.1.resnets.1.conv2.weight",
+  "decoder.up.2.block.1.norm1.bias": "decoder.up_blocks.1.resnets.1.norm1.bias",
+  "decoder.up.2.block.1.norm1.weight": "decoder.up_blocks.1.resnets.1.norm1.weight",
+  "decoder.up.2.block.1.norm2.bias": "decoder.up_blocks.1.resnets.1.norm2.bias",
+  "decoder.up.2.block.1.norm2.weight": "decoder.up_blocks.1.resnets.1.norm2.weight",
+  "decoder.up.2.block.2.conv1.bias": "decoder.up_blocks.1.resnets.2.conv1.bias",
+  "decoder.up.2.block.2.conv1.weight": "decoder.up_blocks.1.resnets.2.conv1.weight",
+  "decoder.up.2.block.2.conv2.bias": "decoder.up_blocks.1.resnets.2.conv2.bias",
+  "decoder.up.2.block.2.conv2.weight": "decoder.up_blocks.1.resnets.2.conv2.weight",
+  "decoder.up.2.block.2.norm1.bias": "decoder.up_blocks.1.resnets.2.norm1.bias",
+  "decoder.up.2.block.2.norm1.weight": "decoder.up_blocks.1.resnets.2.norm1.weight",
+  "decoder.up.2.block.2.norm2.bias": "decoder.up_blocks.1.resnets.2.norm2.bias",
+  "decoder.up.2.block.2.norm2.weight": "decoder.up_blocks.1.resnets.2.norm2.weight",
+  "decoder.up.2.upsample.conv.bias": "decoder.up_blocks.1.upsamplers.0.conv.bias",
+  "decoder.up.2.upsample.conv.weight": "decoder.up_blocks.1.upsamplers.0.conv.weight",
+  "decoder.up.3.block.0.conv1.bias": "decoder.up_blocks.0.resnets.0.conv1.bias",
+  "decoder.up.3.block.0.conv1.weight": "decoder.up_blocks.0.resnets.0.conv1.weight",
+  "decoder.up.3.block.0.conv2.bias": "decoder.up_blocks.0.resnets.0.conv2.bias",
+  "decoder.up.3.block.0.conv2.weight": "decoder.up_blocks.0.resnets.0.conv2.weight",
+  "decoder.up.3.block.0.norm1.bias": "decoder.up_blocks.0.resnets.0.norm1.bias",
+  "decoder.up.3.block.0.norm1.weight": "decoder.up_blocks.0.resnets.0.norm1.weight",
+  "decoder.up.3.block.0.norm2.bias": "decoder.up_blocks.0.resnets.0.norm2.bias",
+  "decoder.up.3.block.0.norm2.weight": "decoder.up_blocks.0.resnets.0.norm2.weight",
+  "decoder.up.3.block.1.conv1.bias": "decoder.up_blocks.0.resnets.1.conv1.bias",
+  "decoder.up.3.block.1.conv1.weight": "decoder.up_blocks.0.resnets.1.conv1.weight",
+  "decoder.up.3.block.1.conv2.bias": "decoder.up_blocks.0.resnets.1.conv2.bias",
+  "decoder.up.3.block.1.conv2.weight": "decoder.up_blocks.0.resnets.1.conv2.weight",
+  "decoder.up.3.block.1.norm1.bias": "decoder.up_blocks.0.resnets.1.norm1.bias",
+  "decoder.up.3.block.1.norm1.weight": "decoder.up_blocks.0.resnets.1.norm1.weight",
+  "decoder.up.3.block.1.norm2.bias": "decoder.up_blocks.0.resnets.1.norm2.bias",
+  "decoder.up.3.block.1.norm2.weight": "decoder.up_blocks.0.resnets.1.norm2.weight",
+  "decoder.up.3.block.2.conv1.bias": "decoder.up_blocks.0.resnets.2.conv1.bias",
+  "decoder.up.3.block.2.conv1.weight": "decoder.up_blocks.0.resnets.2.conv1.weight",
+  "decoder.up.3.block.2.conv2.bias": "decoder.up_blocks.0.resnets.2.conv2.bias",
+  "decoder.up.3.block.2.conv2.weight": "decoder.up_blocks.0.resnets.2.conv2.weight",
+  "decoder.up.3.block.2.norm1.bias": "decoder.up_blocks.0.resnets.2.norm1.bias",
+  "decoder.up.3.block.2.norm1.weight": "decoder.up_blocks.0.resnets.2.norm1.weight",
+  "decoder.up.3.block.2.norm2.bias": "decoder.up_blocks.0.resnets.2.norm2.bias",
+  "decoder.up.3.block.2.norm2.weight": "decoder.up_blocks.0.resnets.2.norm2.weight",
+  "decoder.up.3.upsample.conv.bias": "decoder.up_blocks.0.upsamplers.0.conv.bias",
+  "decoder.up.3.upsample.conv.weight": "decoder.up_blocks.0.upsamplers.0.conv.weight",
+  "encoder.conv_in.bias": "encoder.conv_in.bias",
+  "encoder.conv_in.weight": "encoder.conv_in.weight",
+  "encoder.conv_out.bias": "encoder.conv_out.bias",
+  "encoder.conv_out.weight": "encoder.conv_out.weight",
+  "encoder.down.0.block.0.conv1.bias": "encoder.down_blocks.0.resnets.0.conv1.bias",
+  "encoder.down.0.block.0.conv1.weight": "encoder.down_blocks.0.resnets.0.conv1.weight",
+  "encoder.down.0.block.0.conv2.bias": "encoder.down_blocks.0.resnets.0.conv2.bias",
+  "encoder.down.0.block.0.conv2.weight": "encoder.down_blocks.0.resnets.0.conv2.weight",
+  "encoder.down.0.block.0.norm1.bias": "encoder.down_blocks.0.resnets.0.norm1.bias",
+  "encoder.down.0.block.0.norm1.weight": "encoder.down_blocks.0.resnets.0.norm1.weight",
+  "encoder.down.0.block.0.norm2.bias": "encoder.down_blocks.0.resnets.0.norm2.bias",
+  "encoder.down.0.block.0.norm2.weight": "encoder.down_blocks.0.resnets.0.norm2.weight",
+  "encoder.down.0.block.1.conv1.bias": "encoder.down_blocks.0.resnets.1.conv1.bias",
+  "encoder.down.0.block.1.conv1.weight": "encoder.down_blocks.0.resnets.1.conv1.weight",
+  "encoder.down.0.block.1.conv2.bias": "encoder.down_blocks.0.resnets.1.conv2.bias",
+  "encoder.down.0.block.1.conv2.weight": "encoder.down_blocks.0.resnets.1.conv2.weight",
+  "encoder.down.0.block.1.norm1.bias": "encoder.down_blocks.0.resnets.1.norm1.bias",
+  "encoder.down.0.block.1.norm1.weight": "encoder.down_blocks.0.resnets.1.norm1.weight",
+  "encoder.down.0.block.1.norm2.bias": "encoder.down_blocks.0.resnets.1.norm2.bias",
+  "encoder.down.0.block.1.norm2.weight": "encoder.down_blocks.0.resnets.1.norm2.weight",
+  "encoder.down.0.downsample.conv.bias": "encoder.down_blocks.0.downsamplers.0.conv.bias",
+  "encoder.down.0.downsample.conv.weight": "encoder.down_blocks.0.downsamplers.0.conv.weight",
+  "encoder.down.1.block.0.conv1.bias": "encoder.down_blocks.1.resnets.0.conv1.bias",
+  "encoder.down.1.block.0.conv1.weight": "encoder.down_blocks.1.resnets.0.conv1.weight",
+  "encoder.down.1.block.0.conv2.bias": "encoder.down_blocks.1.resnets.0.conv2.bias",
+  "encoder.down.1.block.0.conv2.weight": "encoder.down_blocks.1.resnets.0.conv2.weight",
+  "encoder.down.1.block.0.nin_shortcut.bias": "encoder.down_blocks.1.resnets.0.conv_shortcut.bias",
+  "encoder.down.1.block.0.nin_shortcut.weight": "encoder.down_blocks.1.resnets.0.conv_shortcut.weight",
+  "encoder.down.1.block.0.norm1.bias": "encoder.down_blocks.1.resnets.0.norm1.bias",
+  "encoder.down.1.block.0.norm1.weight": "encoder.down_blocks.1.resnets.0.norm1.weight",
+  "encoder.down.1.block.0.norm2.bias": "encoder.down_blocks.1.resnets.0.norm2.bias",
+  "encoder.down.1.block.0.norm2.weight": "encoder.down_blocks.1.resnets.0.norm2.weight",
+  "encoder.down.1.block.1.conv1.bias": "encoder.down_blocks.1.resnets.1.conv1.bias",
+  "encoder.down.1.block.1.conv1.weight": "encoder.down_blocks.1.resnets.1.conv1.weight",
+  "encoder.down.1.block.1.conv2.bias": "encoder.down_blocks.1.resnets.1.conv2.bias",
+  "encoder.down.1.block.1.conv2.weight": "encoder.down_blocks.1.resnets.1.conv2.weight",
+  "encoder.down.1.block.1.norm1.bias": "encoder.down_blocks.1.resnets.1.norm1.bias",
+  "encoder.down.1.block.1.norm1.weight": "encoder.down_blocks.1.resnets.1.norm1.weight",
+  "encoder.down.1.block.1.norm2.bias": "encoder.down_blocks.1.resnets.1.norm2.bias",
+  "encoder.down.1.block.1.norm2.weight": "encoder.down_blocks.1.resnets.1.norm2.weight",
+  "encoder.down.1.downsample.conv.bias": "encoder.down_blocks.1.downsamplers.0.conv.bias",
+  "encoder.down.1.downsample.conv.weight": "encoder.down_blocks.1.downsamplers.0.conv.weight",
+  "encoder.down.2.block.0.conv1.bias": "encoder.down_blocks.2.resnets.0.conv1.bias",
+  "encoder.down.2.block.0.conv1.weight": "encoder.down_blocks.2.resnets.0.conv1.weight",
+  "encoder.down.2.block.0.conv2.bias": "encoder.down_blocks.2.resnets.0.conv2.bias",
+  "encoder.down.2.block.0.conv2.weight": "encoder.down_blocks.2.resnets.0.conv2.weight",
+  "encoder.down.2.block.0.nin_shortcut.bias": "encoder.down_blocks.2.resnets.0.conv_shortcut.bias",
+  "encoder.down.2.block.0.nin_shortcut.weight": "encoder.down_blocks.2.resnets.0.conv_shortcut.weight",
+  "encoder.down.2.block.0.norm1.bias": "encoder.down_blocks.2.resnets.0.norm1.bias",
+  "encoder.down.2.block.0.norm1.weight": "encoder.down_blocks.2.resnets.0.norm1.weight",
+  "encoder.down.2.block.0.norm2.bias": "encoder.down_blocks.2.resnets.0.norm2.bias",
+  "encoder.down.2.block.0.norm2.weight": "encoder.down_blocks.2.resnets.0.norm2.weight",
+  "encoder.down.2.block.1.conv1.bias": "encoder.down_blocks.2.resnets.1.conv1.bias",
+  "encoder.down.2.block.1.conv1.weight": "encoder.down_blocks.2.resnets.1.conv1.weight",
+  "encoder.down.2.block.1.conv2.bias": "encoder.down_blocks.2.resnets.1.conv2.bias",
+  "encoder.down.2.block.1.conv2.weight": "encoder.down_blocks.2.resnets.1.conv2.weight",
+  "encoder.down.2.block.1.norm1.bias": "encoder.down_blocks.2.resnets.1.norm1.bias",
+  "encoder.down.2.block.1.norm1.weight": "encoder.down_blocks.2.resnets.1.norm1.weight",
+  "encoder.down.2.block.1.norm2.bias": "encoder.down_blocks.2.resnets.1.norm2.bias",
+  "encoder.down.2.block.1.norm2.weight": "encoder.down_blocks.2.resnets.1.norm2.weight",
+  "encoder.down.2.downsample.conv.bias": "encoder.down_blocks.2.downsamplers.0.conv.bias",
+  "encoder.down.2.downsample.conv.weight": "encoder.down_blocks.2.downsamplers.0.conv.weight",
+  "encoder.down.3.block.0.conv1.bias": "encoder.down_blocks.3.resnets.0.conv1.bias",
+  "encoder.down.3.block.0.conv1.weight": "encoder.down_blocks.3.resnets.0.conv1.weight",
+  "encoder.down.3.block.0.conv2.bias": "encoder.down_blocks.3.resnets.0.conv2.bias",
+  "encoder.down.3.block.0.conv2.weight": "encoder.down_blocks.3.resnets.0.conv2.weight",
+  "encoder.down.3.block.0.norm1.bias": "encoder.down_blocks.3.resnets.0.norm1.bias",
+  "encoder.down.3.block.0.norm1.weight": "encoder.down_blocks.3.resnets.0.norm1.weight",
+  "encoder.down.3.block.0.norm2.bias": "encoder.down_blocks.3.resnets.0.norm2.bias",
+  "encoder.down.3.block.0.norm2.weight": "encoder.down_blocks.3.resnets.0.norm2.weight",
+  "encoder.down.3.block.1.conv1.bias": "encoder.down_blocks.3.resnets.1.conv1.bias",
+  "encoder.down.3.block.1.conv1.weight": "encoder.down_blocks.3.resnets.1.conv1.weight",
+  "encoder.down.3.block.1.conv2.bias": "encoder.down_blocks.3.resnets.1.conv2.bias",
+  "encoder.down.3.block.1.conv2.weight": "encoder.down_blocks.3.resnets.1.conv2.weight",
+  "encoder.down.3.block.1.norm1.bias": "encoder.down_blocks.3.resnets.1.norm1.bias",
+  "encoder.down.3.block.1.norm1.weight": "encoder.down_blocks.3.resnets.1.norm1.weight",
+  "encoder.down.3.block.1.norm2.bias": "encoder.down_blocks.3.resnets.1.norm2.bias",
+  "encoder.down.3.block.1.norm2.weight": "encoder.down_blocks.3.resnets.1.norm2.weight",
+  "encoder.mid.attn_1.k.bias": "encoder.mid_block.attentions.0.to_k.bias",
+  "encoder.mid.attn_1.k.weight": "encoder.mid_block.attentions.0.to_k.weight",
+  "encoder.mid.attn_1.norm.bias": "encoder.mid_block.attentions.0.group_norm.bias",
+  "encoder.mid.attn_1.norm.weight": "encoder.mid_block.attentions.0.group_norm.weight",
+  "encoder.mid.attn_1.proj_out.bias": "encoder.mid_block.attentions.0.to_out.0.bias",
+  "encoder.mid.attn_1.proj_out.weight": "encoder.mid_block.attentions.0.to_out.0.weight",
+  "encoder.mid.attn_1.q.bias": "encoder.mid_block.attentions.0.to_q.bias",
+  "encoder.mid.attn_1.q.weight": "encoder.mid_block.attentions.0.to_q.weight",
+  "encoder.mid.attn_1.v.bias": "encoder.mid_block.attentions.0.to_v.bias",
+  "encoder.mid.attn_1.v.weight": "encoder.mid_block.attentions.0.to_v.weight",
+  "encoder.mid.block_1.conv1.bias": "encoder.mid_block.resnets.0.conv1.bias",
+  "encoder.mid.block_1.conv1.weight": "encoder.mid_block.resnets.0.conv1.weight",
+  "encoder.mid.block_1.conv2.bias": "encoder.mid_block.resnets.0.conv2.bias",
+  "encoder.mid.block_1.conv2.weight": "encoder.mid_block.resnets.0.conv2.weight",
+  "encoder.mid.block_1.norm1.bias": "encoder.mid_block.resnets.0.norm1.bias",
+  "encoder.mid.block_1.norm1.weight": "encoder.mid_block.resnets.0.norm1.weight",
+  "encoder.mid.block_1.norm2.bias": "encoder.mid_block.resnets.0.norm2.bias",
+  "encoder.mid.block_1.norm2.weight": "encoder.mid_block.resnets.0.norm2.weight",
+  "encoder.mid.block_2.conv1.bias": "encoder.mid_block.resnets.1.conv1.bias",
+  "encoder.mid.block_2.conv1.weight": "encoder.mid_block.resnets.1.conv1.weight",
+  "encoder.mid.block_2.conv2.bias": "encoder.mid_block.resnets.1.conv2.bias",
+  "encoder.mid.block_2.conv2.weight": "encoder.mid_block.resnets.1.conv2.weight",
+  "encoder.mid.block_2.norm1.bias": "encoder.mid_block.resnets.1.norm1.bias",
+  "encoder.mid.block_2.norm1.weight": "encoder.mid_block.resnets.1.norm1.weight",
+  "encoder.mid.block_2.norm2.bias": "encoder.mid_block.resnets.1.norm2.bias",
+  "encoder.mid.block_2.norm2.weight": "encoder.mid_block.resnets.1.norm2.weight",
+  "encoder.norm_out.bias": "encoder.conv_norm_out.bias",
+  "encoder.norm_out.weight": "encoder.conv_norm_out.weight",
+  "encoder.quant_conv.bias": "quant_conv.bias",
+  "encoder.quant_conv.weight": "quant_conv.weight"
+ },
+ "detail": {
+  "bn.running_mean": {
+   "src": "bn.running_mean",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00023623555898666382
+  },
+  "bn.running_var": {
+   "src": "bn.running_var",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.007801532745361328
+  },
+  "decoder.conv_in.bias": {
+   "src": "decoder.conv_in.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004849284887313843
+  },
+  "decoder.conv_in.weight": {
+   "src": "decoder.conv_in.weight",
+   "shape": [
+    512,
+    32,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009724199771881104
+  },
+  "decoder.conv_out.bias": {
+   "src": "decoder.conv_out.bias",
+   "shape": [
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 9.391456842422485e-06
+  },
+  "decoder.conv_out.weight": {
+   "src": "decoder.conv_out.weight",
+   "shape": [
+    3,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00012286007404327393
+  },
+  "decoder.mid.attn_1.k.bias": {
+   "src": "decoder.mid_block.attentions.0.to_k.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004624277353286743
+  },
+  "decoder.mid.attn_1.k.weight": {
+   "src": "decoder.mid_block.attentions.0.to_k.weight",
+   "shape": [
+    512,
+    512,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009732842445373535
+  },
+  "decoder.mid.attn_1.norm.bias": {
+   "src": "decoder.mid_block.attentions.0.group_norm.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002375394105911255
+  },
+  "decoder.mid.attn_1.norm.weight": {
+   "src": "decoder.mid_block.attentions.0.group_norm.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00384521484375
+  },
+  "decoder.mid.attn_1.proj_out.bias": {
+   "src": "decoder.mid_block.attentions.0.to_out.0.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004767477512359619
+  },
+  "decoder.mid.attn_1.proj_out.weight": {
+   "src": "decoder.mid_block.attentions.0.to_out.0.weight",
+   "shape": [
+    512,
+    512,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004844069480895996
+  },
+  "decoder.mid.attn_1.q.bias": {
+   "src": "decoder.mid_block.attentions.0.to_q.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009284317493438721
+  },
+  "decoder.mid.attn_1.q.weight": {
+   "src": "decoder.mid_block.attentions.0.to_q.weight",
+   "shape": [
+    512,
+    512,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009731948375701904
+  },
+  "decoder.mid.attn_1.v.bias": {
+   "src": "decoder.mid_block.attentions.0.to_v.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002423897385597229
+  },
+  "decoder.mid.attn_1.v.weight": {
+   "src": "decoder.mid_block.attentions.0.to_v.weight",
+   "shape": [
+    512,
+    512,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004874914884567261
+  },
+  "decoder.mid.block_1.conv1.bias": {
+   "src": "decoder.mid_block.resnets.0.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00038701295852661133
+  },
+  "decoder.mid.block_1.conv1.weight": {
+   "src": "decoder.mid_block.resnets.0.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019522309303283691
+  },
+  "decoder.mid.block_1.conv2.bias": {
+   "src": "decoder.mid_block.resnets.0.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002407953143119812
+  },
+  "decoder.mid.block_1.conv2.weight": {
+   "src": "decoder.mid_block.resnets.0.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009757876396179199
+  },
+  "decoder.mid.block_1.norm1.bias": {
+   "src": "decoder.mid_block.resnets.0.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009621381759643555
+  },
+  "decoder.mid.block_1.norm1.weight": {
+   "src": "decoder.mid_block.resnets.0.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038771629333496094
+  },
+  "decoder.mid.block_1.norm2.bias": {
+   "src": "decoder.mid_block.resnets.0.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009588301181793213
+  },
+  "decoder.mid.block_1.norm2.weight": {
+   "src": "decoder.mid_block.resnets.0.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003628849983215332
+  },
+  "decoder.mid.block_2.conv1.bias": {
+   "src": "decoder.mid_block.resnets.1.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0003598332405090332
+  },
+  "decoder.mid.block_2.conv1.weight": {
+   "src": "decoder.mid_block.resnets.1.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.007364034652709961
+  },
+  "decoder.mid.block_2.conv2.bias": {
+   "src": "decoder.mid_block.resnets.1.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00047665834426879883
+  },
+  "decoder.mid.block_2.conv2.weight": {
+   "src": "decoder.mid_block.resnets.1.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0018327832221984863
+  },
+  "decoder.mid.block_2.norm1.bias": {
+   "src": "decoder.mid_block.resnets.1.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0016380548477172852
+  },
+  "decoder.mid.block_2.norm1.weight": {
+   "src": "decoder.mid_block.resnets.1.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038890838623046875
+  },
+  "decoder.mid.block_2.norm2.bias": {
+   "src": "decoder.mid_block.resnets.1.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004864633083343506
+  },
+  "decoder.mid.block_2.norm2.weight": {
+   "src": "decoder.mid_block.resnets.1.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003622770309448242
+  },
+  "decoder.norm_out.bias": {
+   "src": "decoder.conv_norm_out.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019356608390808105
+  },
+  "decoder.norm_out.weight": {
+   "src": "decoder.conv_norm_out.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0036499500274658203
+  },
+  "decoder.post_quant_conv.bias": {
+   "src": "post_quant_conv.bias",
+   "shape": [
+    32
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0003344118595123291
+  },
+  "decoder.post_quant_conv.weight": {
+   "src": "post_quant_conv.weight",
+   "shape": [
+    32,
+    32,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009472072124481201
+  },
+  "decoder.up.0.block.0.conv1.bias": {
+   "src": "decoder.up_blocks.3.resnets.0.conv1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00041206181049346924
+  },
+  "decoder.up.0.block.0.conv1.weight": {
+   "src": "decoder.up_blocks.3.resnets.0.conv1.weight",
+   "shape": [
+    128,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0017527937889099121
+  },
+  "decoder.up.0.block.0.conv2.bias": {
+   "src": "decoder.up_blocks.3.resnets.0.conv2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002427026629447937
+  },
+  "decoder.up.0.block.0.conv2.weight": {
+   "src": "decoder.up_blocks.3.resnets.0.conv2.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0033156871795654297
+  },
+  "decoder.up.0.block.0.nin_shortcut.bias": {
+   "src": "decoder.up_blocks.3.resnets.0.conv_shortcut.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002361685037612915
+  },
+  "decoder.up.0.block.0.nin_shortcut.weight": {
+   "src": "decoder.up_blocks.3.resnets.0.conv_shortcut.weight",
+   "shape": [
+    128,
+    256,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00045365095138549805
+  },
+  "decoder.up.0.block.0.norm1.bias": {
+   "src": "decoder.up_blocks.3.resnets.0.norm1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0013483762741088867
+  },
+  "decoder.up.0.block.0.norm1.weight": {
+   "src": "decoder.up_blocks.3.resnets.0.norm1.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038489103317260742
+  },
+  "decoder.up.0.block.0.norm2.bias": {
+   "src": "decoder.up_blocks.3.resnets.0.norm2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0014681220054626465
+  },
+  "decoder.up.0.block.0.norm2.weight": {
+   "src": "decoder.up_blocks.3.resnets.0.norm2.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00598454475402832
+  },
+  "decoder.up.0.block.1.conv1.bias": {
+   "src": "decoder.up_blocks.3.resnets.1.conv1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00023347139358520508
+  },
+  "decoder.up.0.block.1.conv1.weight": {
+   "src": "decoder.up_blocks.3.resnets.1.conv1.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.001948535442352295
+  },
+  "decoder.up.0.block.1.conv2.bias": {
+   "src": "decoder.up_blocks.3.resnets.1.conv2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00021191686391830444
+  },
+  "decoder.up.0.block.1.conv2.weight": {
+   "src": "decoder.up_blocks.3.resnets.1.conv2.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019106268882751465
+  },
+  "decoder.up.0.block.1.norm1.bias": {
+   "src": "decoder.up_blocks.3.resnets.1.norm1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0014753341674804688
+  },
+  "decoder.up.0.block.1.norm1.weight": {
+   "src": "decoder.up_blocks.3.resnets.1.norm1.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038869380950927734
+  },
+  "decoder.up.0.block.1.norm2.bias": {
+   "src": "decoder.up_blocks.3.resnets.1.norm2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.001339733600616455
+  },
+  "decoder.up.0.block.1.norm2.weight": {
+   "src": "decoder.up_blocks.3.resnets.1.norm2.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.006374835968017578
+  },
+  "decoder.up.0.block.2.conv1.bias": {
+   "src": "decoder.up_blocks.3.resnets.2.conv1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00023881345987319946
+  },
+  "decoder.up.0.block.2.conv1.weight": {
+   "src": "decoder.up_blocks.3.resnets.2.conv1.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0016198158264160156
+  },
+  "decoder.up.0.block.2.conv2.bias": {
+   "src": "decoder.up_blocks.3.resnets.2.conv2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00031182169914245605
+  },
+  "decoder.up.0.block.2.conv2.weight": {
+   "src": "decoder.up_blocks.3.resnets.2.conv2.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0028460025787353516
+  },
+  "decoder.up.0.block.2.norm1.bias": {
+   "src": "decoder.up_blocks.3.resnets.2.norm1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004877150058746338
+  },
+  "decoder.up.0.block.2.norm1.weight": {
+   "src": "decoder.up_blocks.3.resnets.2.norm1.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038770437240600586
+  },
+  "decoder.up.0.block.2.norm2.bias": {
+   "src": "decoder.up_blocks.3.resnets.2.norm2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.000682145357131958
+  },
+  "decoder.up.0.block.2.norm2.weight": {
+   "src": "decoder.up_blocks.3.resnets.2.norm2.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003878355026245117
+  },
+  "decoder.up.1.block.0.conv1.bias": {
+   "src": "decoder.up_blocks.2.resnets.0.conv1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004471242427825928
+  },
+  "decoder.up.1.block.0.conv1.weight": {
+   "src": "decoder.up_blocks.2.resnets.0.conv1.weight",
+   "shape": [
+    256,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.002020120620727539
+  },
+  "decoder.up.1.block.0.conv2.bias": {
+   "src": "decoder.up_blocks.2.resnets.0.conv2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00035102665424346924
+  },
+  "decoder.up.1.block.0.conv2.weight": {
+   "src": "decoder.up_blocks.2.resnets.0.conv2.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0037556886672973633
+  },
+  "decoder.up.1.block.0.nin_shortcut.bias": {
+   "src": "decoder.up_blocks.2.resnets.0.conv_shortcut.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00036069750785827637
+  },
+  "decoder.up.1.block.0.nin_shortcut.weight": {
+   "src": "decoder.up_blocks.2.resnets.0.conv_shortcut.weight",
+   "shape": [
+    256,
+    512,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00024322420358657837
+  },
+  "decoder.up.1.block.0.norm1.bias": {
+   "src": "decoder.up_blocks.2.resnets.0.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0035278797149658203
+  },
+  "decoder.up.1.block.0.norm1.weight": {
+   "src": "decoder.up_blocks.2.resnets.0.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038901567459106445
+  },
+  "decoder.up.1.block.0.norm2.bias": {
+   "src": "decoder.up_blocks.2.resnets.0.norm2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0018116235733032227
+  },
+  "decoder.up.1.block.0.norm2.weight": {
+   "src": "decoder.up_blocks.2.resnets.0.norm2.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0039021968841552734
+  },
+  "decoder.up.1.block.1.conv1.bias": {
+   "src": "decoder.up_blocks.2.resnets.1.conv1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00044511258602142334
+  },
+  "decoder.up.1.block.1.conv1.weight": {
+   "src": "decoder.up_blocks.2.resnets.1.conv1.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019085407257080078
+  },
+  "decoder.up.1.block.1.conv2.bias": {
+   "src": "decoder.up_blocks.2.resnets.1.conv2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.000254705548286438
+  },
+  "decoder.up.1.block.1.conv2.weight": {
+   "src": "decoder.up_blocks.2.resnets.1.conv2.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0035734176635742188
+  },
+  "decoder.up.1.block.1.norm1.bias": {
+   "src": "decoder.up_blocks.2.resnets.1.norm1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009468197822570801
+  },
+  "decoder.up.1.block.1.norm1.weight": {
+   "src": "decoder.up_blocks.2.resnets.1.norm1.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038797855377197266
+  },
+  "decoder.up.1.block.1.norm2.bias": {
+   "src": "decoder.up_blocks.2.resnets.1.norm2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009960532188415527
+  },
+  "decoder.up.1.block.1.norm2.weight": {
+   "src": "decoder.up_blocks.2.resnets.1.norm2.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0039025545120239258
+  },
+  "decoder.up.1.block.2.conv1.bias": {
+   "src": "decoder.up_blocks.2.resnets.2.conv1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00018753111362457275
+  },
+  "decoder.up.1.block.2.conv1.weight": {
+   "src": "decoder.up_blocks.2.resnets.2.conv1.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0018999576568603516
+  },
+  "decoder.up.1.block.2.conv2.bias": {
+   "src": "decoder.up_blocks.2.resnets.2.conv2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00038680434226989746
+  },
+  "decoder.up.1.block.2.conv2.weight": {
+   "src": "decoder.up_blocks.2.resnets.2.conv2.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019042491912841797
+  },
+  "decoder.up.1.block.2.norm1.bias": {
+   "src": "decoder.up_blocks.2.resnets.2.norm1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009539425373077393
+  },
+  "decoder.up.1.block.2.norm1.weight": {
+   "src": "decoder.up_blocks.2.resnets.2.norm1.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003890395164489746
+  },
+  "decoder.up.1.block.2.norm2.bias": {
+   "src": "decoder.up_blocks.2.resnets.2.norm2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0008914470672607422
+  },
+  "decoder.up.1.block.2.norm2.weight": {
+   "src": "decoder.up_blocks.2.resnets.2.norm2.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.007639646530151367
+  },
+  "decoder.up.1.upsample.conv.bias": {
+   "src": "decoder.up_blocks.2.upsamplers.0.conv.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00024278461933135986
+  },
+  "decoder.up.1.upsample.conv.weight": {
+   "src": "decoder.up_blocks.2.upsamplers.0.conv.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.001902937889099121
+  },
+  "decoder.up.2.block.0.conv1.bias": {
+   "src": "decoder.up_blocks.1.resnets.0.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009579658508300781
+  },
+  "decoder.up.2.block.0.conv1.weight": {
+   "src": "decoder.up_blocks.1.resnets.0.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019515752792358398
+  },
+  "decoder.up.2.block.0.conv2.bias": {
+   "src": "decoder.up_blocks.1.resnets.0.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00036397576332092285
+  },
+  "decoder.up.2.block.0.conv2.weight": {
+   "src": "decoder.up_blocks.1.resnets.0.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019136667251586914
+  },
+  "decoder.up.2.block.0.norm1.bias": {
+   "src": "decoder.up_blocks.1.resnets.0.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009764134883880615
+  },
+  "decoder.up.2.block.0.norm1.weight": {
+   "src": "decoder.up_blocks.1.resnets.0.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003898143768310547
+  },
+  "decoder.up.2.block.0.norm2.bias": {
+   "src": "decoder.up_blocks.1.resnets.0.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0016646385192871094
+  },
+  "decoder.up.2.block.0.norm2.weight": {
+   "src": "decoder.up_blocks.1.resnets.0.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003902435302734375
+  },
+  "decoder.up.2.block.1.conv1.bias": {
+   "src": "decoder.up_blocks.1.resnets.1.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00024431943893432617
+  },
+  "decoder.up.2.block.1.conv1.weight": {
+   "src": "decoder.up_blocks.1.resnets.1.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.002795696258544922
+  },
+  "decoder.up.2.block.1.conv2.bias": {
+   "src": "decoder.up_blocks.1.resnets.1.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00044786930084228516
+  },
+  "decoder.up.2.block.1.conv2.weight": {
+   "src": "decoder.up_blocks.1.resnets.1.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0029932260513305664
+  },
+  "decoder.up.2.block.1.norm1.bias": {
+   "src": "decoder.up_blocks.1.resnets.1.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0018844008445739746
+  },
+  "decoder.up.2.block.1.norm1.weight": {
+   "src": "decoder.up_blocks.1.resnets.1.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0039016008377075195
+  },
+  "decoder.up.2.block.1.norm2.bias": {
+   "src": "decoder.up_blocks.1.resnets.1.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019513964653015137
+  },
+  "decoder.up.2.block.1.norm2.weight": {
+   "src": "decoder.up_blocks.1.resnets.1.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0039027929306030273
+  },
+  "decoder.up.2.block.2.conv1.bias": {
+   "src": "decoder.up_blocks.1.resnets.2.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00024156272411346436
+  },
+  "decoder.up.2.block.2.conv1.weight": {
+   "src": "decoder.up_blocks.1.resnets.2.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0029507875442504883
+  },
+  "decoder.up.2.block.2.conv2.bias": {
+   "src": "decoder.up_blocks.1.resnets.2.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00024268031120300293
+  },
+  "decoder.up.2.block.2.conv2.weight": {
+   "src": "decoder.up_blocks.1.resnets.2.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.001582503318786621
+  },
+  "decoder.up.2.block.2.norm1.bias": {
+   "src": "decoder.up_blocks.1.resnets.2.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0016505718231201172
+  },
+  "decoder.up.2.block.2.norm1.weight": {
+   "src": "decoder.up_blocks.1.resnets.2.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00389707088470459
+  },
+  "decoder.up.2.block.2.norm2.bias": {
+   "src": "decoder.up_blocks.1.resnets.2.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019150376319885254
+  },
+  "decoder.up.2.block.2.norm2.weight": {
+   "src": "decoder.up_blocks.1.resnets.2.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.004459857940673828
+  },
+  "decoder.up.2.upsample.conv.bias": {
+   "src": "decoder.up_blocks.1.upsamplers.0.conv.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0007736086845397949
+  },
+  "decoder.up.2.upsample.conv.weight": {
+   "src": "decoder.up_blocks.1.upsamplers.0.conv.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009748637676239014
+  },
+  "decoder.up.3.block.0.conv1.bias": {
+   "src": "decoder.up_blocks.0.resnets.0.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0003346949815750122
+  },
+  "decoder.up.3.block.0.conv1.weight": {
+   "src": "decoder.up_blocks.0.resnets.0.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019451379776000977
+  },
+  "decoder.up.3.block.0.conv2.bias": {
+   "src": "decoder.up_blocks.0.resnets.0.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0006140172481536865
+  },
+  "decoder.up.3.block.0.conv2.weight": {
+   "src": "decoder.up_blocks.0.resnets.0.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009754002094268799
+  },
+  "decoder.up.3.block.0.norm1.bias": {
+   "src": "decoder.up_blocks.0.resnets.0.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0018161535263061523
+  },
+  "decoder.up.3.block.0.norm1.weight": {
+   "src": "decoder.up_blocks.0.resnets.0.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038793087005615234
+  },
+  "decoder.up.3.block.0.norm2.bias": {
+   "src": "decoder.up_blocks.0.resnets.0.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00048066675662994385
+  },
+  "decoder.up.3.block.0.norm2.weight": {
+   "src": "decoder.up_blocks.0.resnets.0.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038567781448364258
+  },
+  "decoder.up.3.block.1.conv1.bias": {
+   "src": "decoder.up_blocks.0.resnets.1.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 9.854882955551147e-05
+  },
+  "decoder.up.3.block.1.conv1.weight": {
+   "src": "decoder.up_blocks.0.resnets.1.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003148794174194336
+  },
+  "decoder.up.3.block.1.conv2.bias": {
+   "src": "decoder.up_blocks.0.resnets.1.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00045771896839141846
+  },
+  "decoder.up.3.block.1.conv2.weight": {
+   "src": "decoder.up_blocks.0.resnets.1.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0017650127410888672
+  },
+  "decoder.up.3.block.1.norm1.bias": {
+   "src": "decoder.up_blocks.0.resnets.1.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009762942790985107
+  },
+  "decoder.up.3.block.1.norm1.weight": {
+   "src": "decoder.up_blocks.0.resnets.1.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003885984420776367
+  },
+  "decoder.up.3.block.1.norm2.bias": {
+   "src": "decoder.up_blocks.0.resnets.1.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0007510483264923096
+  },
+  "decoder.up.3.block.1.norm2.weight": {
+   "src": "decoder.up_blocks.0.resnets.1.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038820505142211914
+  },
+  "decoder.up.3.block.2.conv1.bias": {
+   "src": "decoder.up_blocks.0.resnets.2.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00012142211198806763
+  },
+  "decoder.up.3.block.2.conv1.weight": {
+   "src": "decoder.up_blocks.0.resnets.2.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0024175643920898438
+  },
+  "decoder.up.3.block.2.conv2.bias": {
+   "src": "decoder.up_blocks.0.resnets.2.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0003465414047241211
+  },
+  "decoder.up.3.block.2.conv2.weight": {
+   "src": "decoder.up_blocks.0.resnets.2.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009749531745910645
+  },
+  "decoder.up.3.block.2.norm1.bias": {
+   "src": "decoder.up_blocks.0.resnets.2.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0030722618103027344
+  },
+  "decoder.up.3.block.2.norm1.weight": {
+   "src": "decoder.up_blocks.0.resnets.2.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.004483699798583984
+  },
+  "decoder.up.3.block.2.norm2.bias": {
+   "src": "decoder.up_blocks.0.resnets.2.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004830360412597656
+  },
+  "decoder.up.3.block.2.norm2.weight": {
+   "src": "decoder.up_blocks.0.resnets.2.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0036597251892089844
+  },
+  "decoder.up.3.upsample.conv.bias": {
+   "src": "decoder.up_blocks.0.upsamplers.0.conv.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0008000433444976807
+  },
+  "decoder.up.3.upsample.conv.weight": {
+   "src": "decoder.up_blocks.0.upsamplers.0.conv.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009692907333374023
+  },
+  "encoder.conv_in.bias": {
+   "src": "encoder.conv_in.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0005939900875091553
+  },
+  "encoder.conv_in.weight": {
+   "src": "encoder.conv_in.weight",
+   "shape": [
+    128,
+    3,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009315311908721924
+  },
+  "encoder.conv_out.bias": {
+   "src": "encoder.conv_out.bias",
+   "shape": [
+    64
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00011536106467247009
+  },
+  "encoder.conv_out.weight": {
+   "src": "encoder.conv_out.weight",
+   "shape": [
+    64,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009699165821075439
+  },
+  "encoder.down.0.block.0.conv1.bias": {
+   "src": "encoder.down_blocks.0.resnets.0.conv1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002236291766166687
+  },
+  "encoder.down.0.block.0.conv1.weight": {
+   "src": "encoder.down_blocks.0.resnets.0.conv1.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0016155242919921875
+  },
+  "encoder.down.0.block.0.conv2.bias": {
+   "src": "encoder.down_blocks.0.resnets.0.conv2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002383589744567871
+  },
+  "encoder.down.0.block.0.conv2.weight": {
+   "src": "encoder.down_blocks.0.resnets.0.conv2.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009057819843292236
+  },
+  "encoder.down.0.block.0.norm1.bias": {
+   "src": "encoder.down_blocks.0.resnets.0.norm1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004468560218811035
+  },
+  "encoder.down.0.block.0.norm1.weight": {
+   "src": "encoder.down_blocks.0.resnets.0.norm1.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0037943124771118164
+  },
+  "encoder.down.0.block.0.norm2.bias": {
+   "src": "encoder.down_blocks.0.resnets.0.norm2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009461343288421631
+  },
+  "encoder.down.0.block.0.norm2.weight": {
+   "src": "encoder.down_blocks.0.resnets.0.norm2.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003905057907104492
+  },
+  "encoder.down.0.block.1.conv1.bias": {
+   "src": "encoder.down_blocks.0.resnets.1.conv1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00021871179342269897
+  },
+  "encoder.down.0.block.1.conv1.weight": {
+   "src": "encoder.down_blocks.0.resnets.1.conv1.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009563863277435303
+  },
+  "encoder.down.0.block.1.conv2.bias": {
+   "src": "encoder.down_blocks.0.resnets.1.conv2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00022390484809875488
+  },
+  "encoder.down.0.block.1.conv2.weight": {
+   "src": "encoder.down_blocks.0.resnets.1.conv2.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004880279302597046
+  },
+  "encoder.down.0.block.1.norm1.bias": {
+   "src": "encoder.down_blocks.0.resnets.1.norm1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004874616861343384
+  },
+  "encoder.down.0.block.1.norm1.weight": {
+   "src": "encoder.down_blocks.0.resnets.1.norm1.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.007674694061279297
+  },
+  "encoder.down.0.block.1.norm2.bias": {
+   "src": "encoder.down_blocks.0.resnets.1.norm2.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009685158729553223
+  },
+  "encoder.down.0.block.1.norm2.weight": {
+   "src": "encoder.down_blocks.0.resnets.1.norm2.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003826737403869629
+  },
+  "encoder.down.0.downsample.conv.bias": {
+   "src": "encoder.down_blocks.0.downsamplers.0.conv.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00019197165966033936
+  },
+  "encoder.down.0.downsample.conv.weight": {
+   "src": "encoder.down_blocks.0.downsamplers.0.conv.weight",
+   "shape": [
+    128,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00048425793647766113
+  },
+  "encoder.down.1.block.0.conv1.bias": {
+   "src": "encoder.down_blocks.1.resnets.0.conv1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002429559826850891
+  },
+  "encoder.down.1.block.0.conv1.weight": {
+   "src": "encoder.down_blocks.1.resnets.0.conv1.weight",
+   "shape": [
+    256,
+    128,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0016317367553710938
+  },
+  "encoder.down.1.block.0.conv2.bias": {
+   "src": "encoder.down_blocks.1.resnets.0.conv2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00023205578327178955
+  },
+  "encoder.down.1.block.0.conv2.weight": {
+   "src": "encoder.down_blocks.1.resnets.0.conv2.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.001214444637298584
+  },
+  "encoder.down.1.block.0.nin_shortcut.bias": {
+   "src": "encoder.down_blocks.1.resnets.0.conv_shortcut.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00047728419303894043
+  },
+  "encoder.down.1.block.0.nin_shortcut.weight": {
+   "src": "encoder.down_blocks.1.resnets.0.conv_shortcut.weight",
+   "shape": [
+    256,
+    128,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00048460066318511963
+  },
+  "encoder.down.1.block.0.norm1.bias": {
+   "src": "encoder.down_blocks.1.resnets.0.norm1.bias",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00048764050006866455
+  },
+  "encoder.down.1.block.0.norm1.weight": {
+   "src": "encoder.down_blocks.1.resnets.0.norm1.weight",
+   "shape": [
+    128
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038728713989257812
+  },
+  "encoder.down.1.block.0.norm2.bias": {
+   "src": "encoder.down_blocks.1.resnets.0.norm2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019411444664001465
+  },
+  "encoder.down.1.block.0.norm2.weight": {
+   "src": "encoder.down_blocks.1.resnets.0.norm2.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038667917251586914
+  },
+  "encoder.down.1.block.1.conv1.bias": {
+   "src": "encoder.down_blocks.1.resnets.1.conv1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00022789090871810913
+  },
+  "encoder.down.1.block.1.conv1.weight": {
+   "src": "encoder.down_blocks.1.resnets.1.conv1.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0037163496017456055
+  },
+  "encoder.down.1.block.1.conv2.bias": {
+   "src": "encoder.down_blocks.1.resnets.1.conv2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.000161685049533844
+  },
+  "encoder.down.1.block.1.conv2.weight": {
+   "src": "encoder.down_blocks.1.resnets.1.conv2.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0006740391254425049
+  },
+  "encoder.down.1.block.1.norm1.bias": {
+   "src": "encoder.down_blocks.1.resnets.1.norm1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0017392635345458984
+  },
+  "encoder.down.1.block.1.norm1.weight": {
+   "src": "encoder.down_blocks.1.resnets.1.norm1.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0039031505584716797
+  },
+  "encoder.down.1.block.1.norm2.bias": {
+   "src": "encoder.down_blocks.1.resnets.1.norm2.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019409656524658203
+  },
+  "encoder.down.1.block.1.norm2.weight": {
+   "src": "encoder.down_blocks.1.resnets.1.norm2.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003903627395629883
+  },
+  "encoder.down.1.downsample.conv.bias": {
+   "src": "encoder.down_blocks.1.downsamplers.0.conv.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002886652946472168
+  },
+  "encoder.down.1.downsample.conv.weight": {
+   "src": "encoder.down_blocks.1.downsamplers.0.conv.weight",
+   "shape": [
+    256,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004879385232925415
+  },
+  "encoder.down.2.block.0.conv1.bias": {
+   "src": "encoder.down_blocks.2.resnets.0.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00043819844722747803
+  },
+  "encoder.down.2.block.0.conv1.weight": {
+   "src": "encoder.down_blocks.2.resnets.0.conv1.weight",
+   "shape": [
+    512,
+    256,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00360107421875
+  },
+  "encoder.down.2.block.0.conv2.bias": {
+   "src": "encoder.down_blocks.2.resnets.0.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00036685168743133545
+  },
+  "encoder.down.2.block.0.conv2.weight": {
+   "src": "encoder.down_blocks.2.resnets.0.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0033985376358032227
+  },
+  "encoder.down.2.block.0.nin_shortcut.bias": {
+   "src": "encoder.down_blocks.2.resnets.0.conv_shortcut.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00046327710151672363
+  },
+  "encoder.down.2.block.0.nin_shortcut.weight": {
+   "src": "encoder.down_blocks.2.resnets.0.conv_shortcut.weight",
+   "shape": [
+    512,
+    256,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00045524537563323975
+  },
+  "encoder.down.2.block.0.norm1.bias": {
+   "src": "encoder.down_blocks.2.resnets.0.norm1.bias",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00048601627349853516
+  },
+  "encoder.down.2.block.0.norm1.weight": {
+   "src": "encoder.down_blocks.2.resnets.0.norm1.weight",
+   "shape": [
+    256
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038852691650390625
+  },
+  "encoder.down.2.block.0.norm2.bias": {
+   "src": "encoder.down_blocks.2.resnets.0.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019305944442749023
+  },
+  "encoder.down.2.block.0.norm2.weight": {
+   "src": "encoder.down_blocks.2.resnets.0.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0039061307907104492
+  },
+  "encoder.down.2.block.1.conv1.bias": {
+   "src": "encoder.down_blocks.2.resnets.1.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004134327173233032
+  },
+  "encoder.down.2.block.1.conv1.weight": {
+   "src": "encoder.down_blocks.2.resnets.1.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003594040870666504
+  },
+  "encoder.down.2.block.1.conv2.bias": {
+   "src": "encoder.down_blocks.2.resnets.1.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00023315846920013428
+  },
+  "encoder.down.2.block.1.conv2.weight": {
+   "src": "encoder.down_blocks.2.resnets.1.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009639859199523926
+  },
+  "encoder.down.2.block.1.norm1.bias": {
+   "src": "encoder.down_blocks.2.resnets.1.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009760856628417969
+  },
+  "encoder.down.2.block.1.norm1.weight": {
+   "src": "encoder.down_blocks.2.resnets.1.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003900289535522461
+  },
+  "encoder.down.2.block.1.norm2.bias": {
+   "src": "encoder.down_blocks.2.resnets.1.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019503235816955566
+  },
+  "encoder.down.2.block.1.norm2.weight": {
+   "src": "encoder.down_blocks.2.resnets.1.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0039048194885253906
+  },
+  "encoder.down.2.downsample.conv.bias": {
+   "src": "encoder.down_blocks.2.downsamplers.0.conv.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004864037036895752
+  },
+  "encoder.down.2.downsample.conv.weight": {
+   "src": "encoder.down_blocks.2.downsamplers.0.conv.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.000976264476776123
+  },
+  "encoder.down.3.block.0.conv1.bias": {
+   "src": "encoder.down_blocks.3.resnets.0.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00038082897663116455
+  },
+  "encoder.down.3.block.0.conv1.weight": {
+   "src": "encoder.down_blocks.3.resnets.0.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019096732139587402
+  },
+  "encoder.down.3.block.0.conv2.bias": {
+   "src": "encoder.down_blocks.3.resnets.0.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00023555010557174683
+  },
+  "encoder.down.3.block.0.conv2.weight": {
+   "src": "encoder.down_blocks.3.resnets.0.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038710832595825195
+  },
+  "encoder.down.3.block.0.norm1.bias": {
+   "src": "encoder.down_blocks.3.resnets.0.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0010903477668762207
+  },
+  "encoder.down.3.block.0.norm1.weight": {
+   "src": "encoder.down_blocks.3.resnets.0.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003903031349182129
+  },
+  "encoder.down.3.block.0.norm2.bias": {
+   "src": "encoder.down_blocks.3.resnets.0.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0014498233795166016
+  },
+  "encoder.down.3.block.0.norm2.weight": {
+   "src": "encoder.down_blocks.3.resnets.0.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003888726234436035
+  },
+  "encoder.down.3.block.1.conv1.bias": {
+   "src": "encoder.down_blocks.3.resnets.1.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00024247914552688599
+  },
+  "encoder.down.3.block.1.conv1.weight": {
+   "src": "encoder.down_blocks.3.resnets.1.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003154158592224121
+  },
+  "encoder.down.3.block.1.conv2.bias": {
+   "src": "encoder.down_blocks.3.resnets.1.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00022657960653305054
+  },
+  "encoder.down.3.block.1.conv2.weight": {
+   "src": "encoder.down_blocks.3.resnets.1.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0037158727645874023
+  },
+  "encoder.down.3.block.1.norm1.bias": {
+   "src": "encoder.down_blocks.3.resnets.1.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009722709655761719
+  },
+  "encoder.down.3.block.1.norm1.weight": {
+   "src": "encoder.down_blocks.3.resnets.1.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038394927978515625
+  },
+  "encoder.down.3.block.1.norm2.bias": {
+   "src": "encoder.down_blocks.3.resnets.1.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019178986549377441
+  },
+  "encoder.down.3.block.1.norm2.weight": {
+   "src": "encoder.down_blocks.3.resnets.1.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0039052963256835938
+  },
+  "encoder.mid.attn_1.k.bias": {
+   "src": "encoder.mid_block.attentions.0.to_k.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0005742907524108887
+  },
+  "encoder.mid.attn_1.k.weight": {
+   "src": "encoder.mid_block.attentions.0.to_k.weight",
+   "shape": [
+    512,
+    512,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.000890880823135376
+  },
+  "encoder.mid.attn_1.norm.bias": {
+   "src": "encoder.mid_block.attentions.0.group_norm.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00048629939556121826
+  },
+  "encoder.mid.attn_1.norm.weight": {
+   "src": "encoder.mid_block.attentions.0.group_norm.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038995742797851562
+  },
+  "encoder.mid.attn_1.proj_out.bias": {
+   "src": "encoder.mid_block.attentions.0.to_out.0.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0004623830318450928
+  },
+  "encoder.mid.attn_1.proj_out.weight": {
+   "src": "encoder.mid_block.attentions.0.to_out.0.weight",
+   "shape": [
+    512,
+    512,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009760856628417969
+  },
+  "encoder.mid.attn_1.q.bias": {
+   "src": "encoder.mid_block.attentions.0.to_q.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0008282065391540527
+  },
+  "encoder.mid.attn_1.q.weight": {
+   "src": "encoder.mid_block.attentions.0.to_q.weight",
+   "shape": [
+    512,
+    512,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00048786401748657227
+  },
+  "encoder.mid.attn_1.v.bias": {
+   "src": "encoder.mid_block.attentions.0.to_v.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0002437382936477661
+  },
+  "encoder.mid.attn_1.v.weight": {
+   "src": "encoder.mid_block.attentions.0.to_v.weight",
+   "shape": [
+    512,
+    512,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009740889072418213
+  },
+  "encoder.mid.block_1.conv1.bias": {
+   "src": "encoder.mid_block.resnets.0.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00023592263460159302
+  },
+  "encoder.mid.block_1.conv1.weight": {
+   "src": "encoder.mid_block.resnets.0.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019354820251464844
+  },
+  "encoder.mid.block_1.conv2.bias": {
+   "src": "encoder.mid_block.resnets.0.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00020463764667510986
+  },
+  "encoder.mid.block_1.conv2.weight": {
+   "src": "encoder.mid_block.resnets.0.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0032951831817626953
+  },
+  "encoder.mid.block_1.norm1.bias": {
+   "src": "encoder.mid_block.resnets.0.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019472837448120117
+  },
+  "encoder.mid.block_1.norm1.weight": {
+   "src": "encoder.mid_block.resnets.0.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003882765769958496
+  },
+  "encoder.mid.block_1.norm2.bias": {
+   "src": "encoder.mid_block.resnets.0.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0018936991691589355
+  },
+  "encoder.mid.block_1.norm2.weight": {
+   "src": "encoder.mid_block.resnets.0.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038890838623046875
+  },
+  "encoder.mid.block_2.conv1.bias": {
+   "src": "encoder.mid_block.resnets.1.conv1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00043699145317077637
+  },
+  "encoder.mid.block_2.conv1.weight": {
+   "src": "encoder.mid_block.resnets.1.conv1.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.003768444061279297
+  },
+  "encoder.mid.block_2.conv2.bias": {
+   "src": "encoder.mid_block.resnets.1.conv2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.00044408440589904785
+  },
+  "encoder.mid.block_2.conv2.weight": {
+   "src": "encoder.mid_block.resnets.1.conv2.weight",
+   "shape": [
+    512,
+    512,
+    3,
+    3
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.007647514343261719
+  },
+  "encoder.mid.block_2.norm1.bias": {
+   "src": "encoder.mid_block.resnets.1.norm1.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009623467922210693
+  },
+  "encoder.mid.block_2.norm1.weight": {
+   "src": "encoder.mid_block.resnets.1.norm1.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0038908720016479492
+  },
+  "encoder.mid.block_2.norm2.bias": {
+   "src": "encoder.mid_block.resnets.1.norm2.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0019429326057434082
+  },
+  "encoder.mid.block_2.norm2.weight": {
+   "src": "encoder.mid_block.resnets.1.norm2.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0060727596282958984
+  },
+  "encoder.norm_out.bias": {
+   "src": "encoder.conv_norm_out.bias",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0009503364562988281
+  },
+  "encoder.norm_out.weight": {
+   "src": "encoder.conv_norm_out.weight",
+   "shape": [
+    512
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0039037466049194336
+  },
+  "encoder.quant_conv.bias": {
+   "src": "quant_conv.bias",
+   "shape": [
+    64
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.001616835594177246
+  },
+  "encoder.quant_conv.weight": {
+   "src": "quant_conv.weight",
+   "shape": [
+    64,
+    64,
+    1,
+    1
+   ],
+   "dtype": "torch.float32",
+   "max_dev": 0.0017470717430114746
+  }
+ }
+}

@@ -1,0 +1,42 @@
+# ReFlowSET dependencies, pinned to the versions the released checkpoints were
+# trained and evaluated with.
+#
+# Install torch/torchvision FIRST, from the wheel index matching your CUDA
+# version (https://pytorch.org). The pins below are the CUDA 12.8 builds used
+# here; on Blackwell (sm_100) do not go below cu128.
+#
+#   pip install torch==2.11.0 torchvision==0.26.0 --index-url https://download.pytorch.org/whl/cu128
+#   pip install -r requirements.txt
+
+torch==2.11.0
+torchvision==0.26.0
+
+numpy==2.4.3
+pillow==12.3.0
+einops==0.8.2
+omegaconf==2.3.0
+tqdm==4.70.0
+
+# model + checkpoint IO
+diffusers==0.37.1
+safetensors==0.7.0
+accelerate==1.13.0
+huggingface-hub==1.26.0
+
+# evaluation. torchmetrics supplies PSNR/SSIM at data_range=1, lpips the VGG
+# LPIPS, pytorch-fid the FID, pyiqa the DISTS.
+torchmetrics==1.9.0
+lpips==0.1.4
+pytorch-fid==0.3.0
+pyiqa==0.1.16
+
+# TRAINING ONLY — the REPA teacher. There is nothing to pip install: the
+# backbone definition comes from a clone of the DINOv3 repository, which
+# scripts/train.py imports as `dinov3.hub.backbones`, and the weights are not
+# redistributable. Both are obtained from Meta under the DINOv3 License:
+#
+#   git clone https://github.com/facebookresearch/dinov3
+#   # then download dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth from the model
+#   # release linked there, and point repa_teacher.repo / .weights at them.
+#
+# Inference does not need any of this. Train with `--lambda-repa 0` to skip it.

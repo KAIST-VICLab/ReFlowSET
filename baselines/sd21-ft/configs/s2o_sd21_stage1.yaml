@@ -1,0 +1,58 @@
+# Stage 1: 'only-finetuned SD2.1' baseline on SAR2Opt (official 1450/627 split).
+# Clone of configs/qxs_sd21_stage1.yaml adapted to SAR2Opt via the repo's native
+# SAROptFeeder: paper protocol = random 512 crop of the 600px images at train
+# time, center 512 crop at test time (upstream saropt_eps_conf.yaml).
+# batch_size 16 matches the upstream SAR2Opt config (same pixel budget as
+# QXS's 64 @ 256). accelerator_path -> SD2.1 U-Net with duplicated 8-ch conv_in.
+# eval_epoch 50: ~90 steps/epoch -> eval every ~4.5k steps (~11 evals / 50k).
+seed: 2024
+num_worker: 4
+work_dir: ${WORK_DIR}/s2o_sd21ft/
+
+phase: train
+
+# feeder
+feeder: feeders.feeder.SAROptFeeder
+train_feeder_args:
+  dataroot: ${DATA_ROOT}/sar2opt/
+  listroot: ${SPLITS_ROOT}/sar2opt/train_eo_list.txt
+  load_size: 600
+  crop_size: 512
+  hflip: True
+  vflip: True
+  rot: True
+
+test_feeder_args:
+  dataroot: ${DATA_ROOT}/sar2opt/
+  listroot: ${SPLITS_ROOT}/sar2opt/test_eo_list.txt
+  load_size: 600
+  crop_size: 512
+
+# optim
+optimizer: AdamW
+learning_rate: 3e-5
+weight_decay: 0.01
+lr_scheduler: cosine
+num_iter: 50000
+num_warmup: 100
+
+# loss
+prediction_type: epsilon
+
+# logging
+log_iter: 100
+save_iter: 10000
+save_epoch: 50
+eval_epoch: 50
+
+# training
+gpu: 0
+batch_size: 16
+test_batch_size: 1
+mixed_precision: "no"
+pretrained_model_name_or_path: Manojb/stable-diffusion-2-1-base
+accelerator_path: ${CKPT_ROOT}/sd21_unet8ch_init.safetensors
+
+# test
+num_inference_steps: 50
+val_len: 100

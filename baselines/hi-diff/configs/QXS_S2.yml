@@ -1,0 +1,171 @@
+# HI-Diff Stage-2 on QXS SAR->EO (LQ = SAR, GT = EO). Initializes net_g/net_le
+# from Stage-1 (25k iters). Batch 8 @ 256 (see S1 note). Matched: 25k + 25k = 50k
+# (official recipe: 300k + 300k, progressive 128->384; QXS is fixed 256px).
+name: train_HI_Diff_QXS_S2
+model_type: HI_Diff_S2
+scale: 1
+num_gpu: 1
+manual_seed: 100
+
+datasets:
+  train:
+    name: TrainSet
+    type: PairedImageIRDataset
+    dataroot_gt: ${DATA_ROOT}/QXS_AB/trainB
+    dataroot_lq: ${DATA_ROOT}/QXS_AB/trainA
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+    use_shuffle: true
+    num_worker_per_gpu: 8
+    batch_size_per_gpu: 8
+    dataset_enlarge_ratio: 1
+    prefetch_mode: ~
+
+    ### progressive training disabled: single fixed group (QXS is 256px)
+    mini_batch_sizes: [8]
+    iters: [25000]
+    gt_size: 256
+    gt_sizes: [256]
+
+  val:
+    name: ValSet
+    type: PairedImageIRDataset
+    dataroot_gt: ${DATA_ROOT}/qxs_hidiff/valB
+    dataroot_lq: ${DATA_ROOT}/qxs_hidiff/valA
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+# network structures
+network_g:
+  type: Transformer
+  inp_channels: 3
+  out_channels: 3
+  dim: 48
+  num_blocks: [3,5,6,6]
+  num_refinement_blocks: 4
+  heads: [1,2,4,8]
+  ffn_expansion_factor: 2.66
+  bias: False
+  LayerNorm_type: WithBias
+  dual_pixel_task: False
+  embed_dim: 64
+  group: 4 # N=4*4
+
+network_le:
+  type: latent_encoder_gelu
+  in_chans: 6
+  embed_dim: 64 # same as above
+  block_num: 6
+  group: 4 # same as above
+  stage: 1
+  patch_expansion: 0.5
+  channel_expansion: 4
+
+network_le_dm:
+  type: latent_encoder_gelu
+  in_chans: 3
+  embed_dim: 64 # same as above
+  block_num: 6
+  group: 4 # same as above
+  stage: 2
+  patch_expansion: 0.5
+  channel_expansion: 4
+
+network_d:
+  type: denoising
+  in_channel: 256 # (embed_dim*4)
+  out_channel: 256 # (embed_dim*4)
+  inner_channel: 512
+  block_num: 4
+  group: 4 # same as above
+  patch_expansion: 0.5
+  channel_expansion: 2
+
+diffusion_schedule:
+  apply_ldm: False
+  schedule: linear
+  timesteps: 8
+  linear_start: 0.1 # 1e-6
+  linear_end: 0.99 # 1e-2
+
+# path
+path:
+  pretrain_network_g: ${WORK_DIR}/hidiff/experiments/train_HI_Diff_QXS_S1/models/net_g_latest.pth
+  param_key_g: params
+  strict_load_g: true
+
+  pretrain_network_le: ${WORK_DIR}/hidiff/experiments/train_HI_Diff_QXS_S1/models/net_le_latest.pth
+  param_key_g: params
+  strict_load_le: true
+
+  pretrain_network_le_dm: ~
+  param_key_g: params
+  strict_load_le_dm: true
+
+  pretrain_network_d: ~
+  param_key_g: params
+  strict_load_d: true
+
+  resume_state: ~
+
+# training settings
+train:
+  total_iter: 25000
+  warmup_iter: -1 # no warm up
+  use_grad_clip: True
+
+  scheduler:
+    type: CosineAnnealingRestartCyclicLR
+    periods: [8000, 17000]
+    restart_weights: [1,1]
+    eta_mins: [0.0002,0.000001]
+
+  mixing_augs:
+    mixup: false
+    mixup_beta: 1.2
+    use_identity: true
+
+  optim_total:
+    type: AdamW
+    lr: !!float 2e-4
+    weight_decay: !!float 1e-4
+    betas: [0.9, 0.999]
+
+  # losses
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+
+  pixel_diff_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+
+# validation settings
+val:
+  val_freq: !!float 5e3
+  save_img: false
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+
+# logging settings
+logger:
+  print_freq: 100
+  save_checkpoint_freq: !!float 5e3
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500

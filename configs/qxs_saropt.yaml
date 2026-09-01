@@ -1,0 +1,127 @@
+# ReFlowSET — QXS-SAROPT arm.
+#
+# Every value here is the value the released `qxs-saropt` checkpoint was trained
+# with, taken from the run's own records:
+#   * the trainer's resolved config, written at launch;
+#   * the `config` block embedded inside the checkpoint file itself;
+#   * the training log's schedule line.
+# The three agree.
+#
+# ---------------------------------------------------------------------------
+# Recorded contradiction, and how it was resolved
+# ---------------------------------------------------------------------------
+# A second resolved-config file exists under this arm's *evaluation* report
+# directory, and it says `train.steps: 20000`, `train.lr: 2e-05`,
+# `train.warmup_steps: 500` — none of which match the shipped checkpoint, whose
+# filename, embedded `step` field and log all say 40,000.
+#
+# That file is not a record of training. It is the experiment YAML re-resolved
+# by the *evaluation* script at scoring time: its `name` is the YAML's name
+# rather than the run's, its `train:` block is byte-for-byte the YAML defaults,
+# and the evaluation command line carried no `train.*` override at all (the
+# evaluator reads only the `model.*`, `data.*` and `bridge.*` sections, so its
+# `train:` section is inert decoration).
+#
+# The training command line, the checkpoint's embedded config and the training
+# log independently record 40,000 steps at peak lr 5.0e-4 with a 1,000-step
+# warmup. Those are the values below. The 20,000 / 2e-05 pair describes nothing
+# that ran.
+#
+# ---------------------------------------------------------------------------
+# Data are NOT redistributed. Set `data.root` to your own copy of QXS-SAROPT
+# (https://github.com/yaoxu008/QXS-SAROPT). The split lists in `splits/` are
+# frozen and must be used verbatim; do not regenerate them.
+
+name: qxs-saropt
+
+data:
+  # Directory containing `opt_256_oc_0.2/` and `sar_256_oc_0.2/`.
+  root: /path/to/QXSLAB_SAROPT
+  # EO paths, relative to `root`. The SAR path is derived from each EO path by
+  # substituting `opt_256_oc_0.2` -> `sar_256_oc_0.2`, so the two can never
+  # drift apart. 16,001 train / 3,999 test.
+  train_list: splits/qxs-saropt/train_eo_list.txt
+  path_rule: qxs-saropt
+  # QXS tiles are natively 256x256, so this crop is a no-op on this dataset.
+  # It is still a *crop*: ReFlowSET never resizes an input.
+  resolution: 256
+  num_workers: 8
+  pin_memory: true
+
+model:
+  in_channels: 128
+  out_channels: 128
+  hidden_size: 1024
+  depth: 24            # 8 double-stream + 16 single-stream
+  num_heads: 16        # head dim 64
+  mlp_ratio: 4.0       # SwiGLU
+  axes_dim: [32, 32]   # 2-D RoPE over (y, x); must sum to the head dim
+  theta: 10000
+  double_blocks: 8
+  double_merge: token
+  sample_size: 256     # provenance only; the forward pass derives every shape
+  # The frozen FLUX.2 autoencoder. Build it with
+  # `scripts/convert_flux2_ae.py`, or point this at the `vae/` subfolder of a
+  # released ReFlowSET checkpoint.
+  ae: weights/ae.safetensors
+
+bridge:
+  # Design B: z_t = (1 - t) * eps + t * z_e, conditioned on the SAR latent,
+  # target u* = z_e - eps. t = 0 is noise and t = 1 is data.
+  source: noise
+  sigma_b: 0.0         # deterministic bridge; no stochastic term ever runs
+  t_end: 1.0
+  time_scheme: uniform # t ~ U(0, 1), clamped to [0, 1 - 1e-3]
+  # Per-row Bernoulli zeroing of the SAR latent — the same all-zero null the
+  # classifier-free-guidance branch uses at sampling time.
+  cond_drop_p: 0.1
+
+loss:
+  flow: mse            # plain velocity MSE; the beta-NLL head never ran
+  lambda_repa: 0.5
+  repa_gate: linear    # w(t) = t, applied per sample
+  repa_block: 8        # 1-based tap; == double_blocks, so the tap is the EO
+                       # stream leaving the last double-stream block
+  repa_dim: 1024       # DINOv3 ViT-L/16 embedding width
+
+# Representation alignment teacher. NOT redistributed: download DINOv3 from
+# https://github.com/facebookresearch/dinov3 and accept its licence. Set both
+# fields, or set `loss.lambda_repa: 0.0` to train without the REPA term (which
+# is an ablation, not the released recipe).
+repa_teacher:
+  variant: lvd         # LVD-1689M ViT-L/16 — the checkpoint that actually ran
+  repo: null           # path to a clone of facebookresearch/dinov3
+  weights: null        # .../dinov3_vitl16_pretrain_lvd1689m-8aa4cbdd.pth
+
+aug:
+  # One identical element of the 8-element dihedral group is drawn per sample
+  # and applied to SAR and EO together.
+  hflip: true
+  vflip: true
+  rot90: true
+  # No speckle augmentation and no speckle-consistency loss were used. The
+  # knobs for them are deliberately absent from this config rather than
+  # present and set to zero.
+
+train:
+  steps: 40000
+  global_batch_size: 64
+  # As run: micro-batch 64, gradient accumulation 1, on one B200 (peak 55.55
+  # GiB allocated, 6 h 08 m, 126.0 samples/s). Lower this — it must divide
+  # `global_batch_size` — to fit a smaller card; the effective batch, and
+  # therefore the recipe, is unchanged.
+  micro_batch_size: 64
+  lr: 5.0e-4
+  lr_schedule: cosine
+  min_lr: 1.0e-6
+  warmup_steps: 1000
+  betas: [0.9, 0.999]
+  eps: 1.0e-8
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  ema_decay: 0.9999
+  mixed_precision: bf16
+  seed: 2024
+  log_every: 50
+  ckpt_every: 5000
+  output_dir: runs/qxs-saropt
