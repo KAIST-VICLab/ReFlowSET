@@ -7,7 +7,7 @@ Face Hub; the code that produced each one is in this repository.
 | | |
 |---|---|
 | Ours | [`JeonghyeokDo/ReFlowSET`](https://huggingface.co/JeonghyeokDo/ReFlowSET) |
-| Comparison methods | [`JeonghyeokDo/ReFlowSET-baselines`](https://huggingface.co/JeonghyeokDo/ReFlowSET-baselines) |
+| Comparison methods | [`JeonghyeokDo/ReFlowSET`](https://huggingface.co/JeonghyeokDo/ReFlowSET/tree/main/baselines), under `baselines/` |
 
 > **These numbers are not comparable with the ones printed in the source
 > papers.** Different splits, resolutions and evaluator conventions make
