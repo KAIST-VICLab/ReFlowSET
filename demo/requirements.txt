@@ -1,0 +1,11 @@
+# Pinned to the versions the released checkpoints were trained and evaluated
+# with. torch is the CPU wheel: this Space runs on free CPU hardware.
+torch==2.11.0
+torchvision==0.26.0
+numpy==2.4.3
+pillow==12.3.0
+einops==0.8.2
+diffusers==0.37.1
+safetensors==0.7.0
+accelerate==1.13.0
+huggingface-hub==1.26.0

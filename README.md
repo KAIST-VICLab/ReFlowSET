@@ -242,6 +242,22 @@ python vae_audit/vae_recon_audit.py --dataset qxs-saropt --data-root /path/to/QX
 
 ---
 
+## Interactive demo
+
+`demo/app.py` is a Gradio app that runs the released checkpoints on your own SAR
+imagery, with sliders for NFE, guidance and seed.
+
+```bash
+pip install -r demo/requirements.txt gradio
+python demo/app.py
+```
+
+At NFE 4 with guidance 1.5 it takes about 8 s per 256x256 image on four CPU
+threads and 36 s at 512x512; the paper's NFE 50 is minutes on a CPU and seconds
+on a GPU. See [`demo/README.md`](demo/README.md).
+
+---
+
 ## Comparison methods
 
 All fifteen prior methods in the main table were **retrained by us** on the same
@@ -279,6 +295,7 @@ ReFlowSET/
 ├── assets/
 │   └── flux2_ae_key_map.json     # value-recovered rename table for the autoencoder
 ├── baselines/                    # reproduction kit for the 15 comparison methods
+├── demo/                         # Gradio app that runs the released checkpoints
 ├── vae_audit/                    # autoencoder reconstruction-ceiling audit: 6 AEs, 4 datasets
 ├── MODEL_ZOO.md                  # every cell: metrics, weights, budget, licence
 ├── LICENSE                       # Apache-2.0, our code
