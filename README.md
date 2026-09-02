@@ -8,7 +8,7 @@ Official PyTorch implementation of the paper **"ReFlowSET: Representation-Aligne
 
 <sup>&dagger;</sup> Corresponding author
 
-[![arXiv](https://img.shields.io/badge/arXiv-{{ARXIV_ID}}-red)](https://arxiv.org/abs/{{ARXIV_ID}})
+[![arXiv](https://img.shields.io/badge/arXiv-2609.00968-red)](https://arxiv.org/abs/2609.00968)
 [![Project Page](https://img.shields.io/badge/Project%20Page-ReFlowSET-green)](https://kaist-viclab.github.io/ReFlowSET_site/)
 [![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-ReFlowSET-yellow)](https://huggingface.co/JeonghyeokDo/ReFlowSET)
 
@@ -295,7 +295,7 @@ ReFlowSET/
 @article{do2026reflowset,
   title   = {ReFlowSET: Representation-Aligned Latent Flow Matching for SAR-to-EO Image Translation},
   author  = {Do, Jeonghyeok and Lee, Seungchul and Kim, Munchurl},
-  journal = {arXiv preprint arXiv:{{ARXIV_ID}}},
+  journal = {arXiv preprint arXiv:2609.00968},
   year    = {2026}
 }
 ```
